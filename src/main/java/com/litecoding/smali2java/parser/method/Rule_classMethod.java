@@ -17,11 +17,11 @@ import com.litecoding.smali2java.parser.Rule;
 import com.litecoding.smali2java.parser.Rule_accessMode;
 import com.litecoding.smali2java.parser.Rule_classConstructorName;
 import com.litecoding.smali2java.parser.Rule_classMethodProto;
-import com.litecoding.smali2java.parser.Rule_optPadding;
-import com.litecoding.smali2java.parser.Rule_padding;
 import com.litecoding.smali2java.parser.Rule_qualifier;
 import com.litecoding.smali2java.parser.Visitor;
 import com.litecoding.smali2java.parser.whitespacecharacters.Rule_CRLF;
+import com.litecoding.smali2java.parser.whitespacecharacters.Rule_optPadding;
+import com.litecoding.smali2java.parser.whitespacecharacters.Rule_padding;
 
 final public class Rule_classMethod extends Rule
 {
@@ -66,6 +66,9 @@ final public class Rule_classMethod extends Rule
           }
           parsed = c1 == 1;
         }
+        
+        /* .method */
+        
         if (parsed)
         {
           boolean f1 = true;

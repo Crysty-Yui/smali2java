@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
 import com.litecoding.smali2java.parser.Rule_dirEnd;
-import com.litecoding.smali2java.parser.Rule_padding;
 import com.litecoding.smali2java.parser.Terminal_StringValue;
 import com.litecoding.smali2java.parser.Visitor;
+import com.litecoding.smali2java.parser.whitespacecharacters.Rule_padding;
 
 final public class Rule_dirEndMethod extends Rule
 {
@@ -66,7 +66,7 @@ final public class Rule_dirEndMethod extends Rule
           parsed = c1 == 1;
         }
         
-        /* \b */
+        /* 空格 */
         
         if (parsed)
         {
