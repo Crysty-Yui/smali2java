@@ -41,7 +41,6 @@ final public class Rule_dirMethod extends Rule
     parsed = false;
     if (!parsed)
     {
-      {
         ArrayList<Rule> e1 = new ArrayList<Rule>();
         int s1 = context.index;
         parsed = true;
@@ -52,7 +51,7 @@ final public class Rule_dirMethod extends Rule
           for (int i1 = 0; i1 < 1 && f1; i1++)
           {
             rule = Terminal_StringValue.parse(context, ".method");
-            if ((f1 = rule != null))
+            if (f1 = rule != null)
             {
               e1.add(rule);
               c1++;
@@ -64,7 +63,6 @@ final public class Rule_dirMethod extends Rule
           e0.addAll(e1);
         else
           context.index = s1;
-      }
     }
 
     rule = null;
@@ -77,6 +75,12 @@ final public class Rule_dirMethod extends Rule
 
     return (Rule_dirMethod)rule;
   }
+
+	public static void main(String[] args) {
+		ParserContext context = new ParserContext(".method", true);
+		Rule rule = parse(context);
+		System.out.println("rule: " + rule);
+	}
 }
 
 /* -----------------------------------------------------------------------------
