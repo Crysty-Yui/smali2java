@@ -1,5 +1,5 @@
 /* -----------------------------------------------------------------------------
- * Rule_smaliMethodRef.java
+ * Rule_todoStubLine.java
  * -----------------------------------------------------------------------------
  *
  * Producer : com.parse2.aparse.Parser 2.3
@@ -14,13 +14,12 @@ import java.util.ArrayList;
 
 import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
-import com.litecoding.smali2java.parser.Terminal_StringValue;
 import com.litecoding.smali2java.parser.Visitor;
-import com.litecoding.smali2java.parser.method.Rule_classMethodProto;
+import com.litecoding.smali2java.parser.text.Rule_VCHAR;
 
-final public class Rule_smaliMethodRef extends Rule
+final public class Rule_todoStubLine extends Rule
 {
-  private Rule_smaliMethodRef(String spelling, ArrayList<Rule> rules)
+  private Rule_todoStubLine(String spelling, ArrayList<Rule> rules)
   {
     super(spelling, rules);
   }
@@ -30,9 +29,9 @@ final public class Rule_smaliMethodRef extends Rule
     return visitor.visit(this);
   }
 
-  public static Rule_smaliMethodRef parse(ParserContext context)
+  public static Rule_todoStubLine parse(ParserContext context)
   {
-    context.push("smaliMethodRef");
+    context.push("todoStubLine");
 
     boolean parsed = true;
     int s0 = context.index;
@@ -49,38 +48,9 @@ final public class Rule_smaliMethodRef extends Rule
         if (parsed)
         {
           boolean f1 = true;
+          @SuppressWarnings("unused")
           int c1 = 0;
-          for (int i1 = 0; i1 < 1 && f1; i1++)
-          {
-            rule = Rule_className.parse(context);
-            if ((f1 = rule != null))
-            {
-              e1.add(rule);
-              c1++;
-            }
-          }
-          parsed = c1 == 1;
-        }
-        if (parsed)
-        {
-          boolean f1 = true;
-          int c1 = 0;
-          for (int i1 = 0; i1 < 1 && f1; i1++)
-          {
-            rule = Terminal_StringValue.parse(context, "->");
-            if ((f1 = rule != null))
-            {
-              e1.add(rule);
-              c1++;
-            }
-          }
-          parsed = c1 == 1;
-        }
-        if (parsed)
-        {
-          boolean f1 = true;
-          int c1 = 0;
-          for (int i1 = 0; i1 < 1 && f1; i1++)
+          while (f1)
           {
             int g1 = context.index;
             parsed = false;
@@ -96,7 +66,7 @@ final public class Rule_smaliMethodRef extends Rule
                   int c2 = 0;
                   for (int i2 = 0; i2 < 1 && f2; i2++)
                   {
-                    rule = Rule_smaliConstructorName.parse(context);
+                    rule = Rule_VCHAR.parse(context);
                     if ((f2 = rule != null))
                     {
                       e2.add(rule);
@@ -123,7 +93,7 @@ final public class Rule_smaliMethodRef extends Rule
                   int c2 = 0;
                   for (int i2 = 0; i2 < 1 && f2; i2++)
                   {
-                    rule = Rule_qualifier.parse(context);
+                    rule = Rule_padding.parse(context);
                     if ((f2 = rule != null))
                     {
                       e2.add(rule);
@@ -141,22 +111,7 @@ final public class Rule_smaliMethodRef extends Rule
             f1 = context.index > g1;
             if (parsed) c1++;
           }
-          parsed = c1 == 1;
-        }
-        if (parsed)
-        {
-          boolean f1 = true;
-          int c1 = 0;
-          for (int i1 = 0; i1 < 1 && f1; i1++)
-          {
-            rule = Rule_classMethodProto.parse(context);
-            if ((f1 = rule != null))
-            {
-              e1.add(rule);
-              c1++;
-            }
-          }
-          parsed = c1 == 1;
+          parsed = true;
         }
         if (parsed)
           e0.addAll(e1);
@@ -167,13 +122,13 @@ final public class Rule_smaliMethodRef extends Rule
 
     rule = null;
     if (parsed)
-      rule = new Rule_smaliMethodRef(context.text.substring(s0, context.index), e0);
+      rule = new Rule_todoStubLine(context.text.substring(s0, context.index), e0);
     else
       context.index = s0;
 
-    context.pop("smaliMethodRef", parsed);
+    context.pop("todoStubLine", parsed);
 
-    return (Rule_smaliMethodRef)rule;
+    return (Rule_todoStubLine)rule;
   }
 }
 

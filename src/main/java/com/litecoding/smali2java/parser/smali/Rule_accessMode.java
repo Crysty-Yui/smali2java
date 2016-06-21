@@ -1,5 +1,5 @@
 /* -----------------------------------------------------------------------------
- * Rule_smaliFieldRef.java
+ * Rule_accessMode.java
  * -----------------------------------------------------------------------------
  *
  * Producer : com.parse2.aparse.Parser 2.3
@@ -16,11 +16,10 @@ import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
 import com.litecoding.smali2java.parser.Terminal_StringValue;
 import com.litecoding.smali2java.parser.Visitor;
-import com.litecoding.smali2java.parser.text.Rule_COLON;
 
-final public class Rule_smaliFieldRef extends Rule
+final public class Rule_accessMode extends Rule
 {
-  private Rule_smaliFieldRef(String spelling, ArrayList<Rule> rules)
+  private Rule_accessMode(String spelling, ArrayList<Rule> rules)
   {
     super(spelling, rules);
   }
@@ -30,9 +29,9 @@ final public class Rule_smaliFieldRef extends Rule
     return visitor.visit(this);
   }
 
-  public static Rule_smaliFieldRef parse(ParserContext context)
+  public static Rule_accessMode parse(ParserContext context)
   {
-    context.push("smaliFieldRef");
+    context.push("accessMode");
 
     boolean parsed = true;
     int s0 = context.index;
@@ -52,7 +51,7 @@ final public class Rule_smaliFieldRef extends Rule
           int c1 = 0;
           for (int i1 = 0; i1 < 1 && f1; i1++)
           {
-            rule = Rule_className.parse(context);
+            rule = Terminal_StringValue.parse(context, "public");
             if ((f1 = rule != null))
             {
               e1.add(rule);
@@ -62,12 +61,24 @@ final public class Rule_smaliFieldRef extends Rule
           parsed = c1 == 1;
         }
         if (parsed)
+          e0.addAll(e1);
+        else
+          context.index = s1;
+      }
+    }
+    if (!parsed)
+    {
+      {
+        ArrayList<Rule> e1 = new ArrayList<Rule>();
+        int s1 = context.index;
+        parsed = true;
+        if (parsed)
         {
           boolean f1 = true;
           int c1 = 0;
           for (int i1 = 0; i1 < 1 && f1; i1++)
           {
-            rule = Terminal_StringValue.parse(context, "->");
+            rule = Terminal_StringValue.parse(context, "private");
             if ((f1 = rule != null))
             {
               e1.add(rule);
@@ -77,12 +88,24 @@ final public class Rule_smaliFieldRef extends Rule
           parsed = c1 == 1;
         }
         if (parsed)
+          e0.addAll(e1);
+        else
+          context.index = s1;
+      }
+    }
+    if (!parsed)
+    {
+      {
+        ArrayList<Rule> e1 = new ArrayList<Rule>();
+        int s1 = context.index;
+        parsed = true;
+        if (parsed)
         {
           boolean f1 = true;
           int c1 = 0;
           for (int i1 = 0; i1 < 1 && f1; i1++)
           {
-            rule = Rule_qualifier.parse(context);
+            rule = Terminal_StringValue.parse(context, "protected");
             if ((f1 = rule != null))
             {
               e1.add(rule);
@@ -92,12 +115,24 @@ final public class Rule_smaliFieldRef extends Rule
           parsed = c1 == 1;
         }
         if (parsed)
+          e0.addAll(e1);
+        else
+          context.index = s1;
+      }
+    }
+    if (!parsed)
+    {
+      {
+        ArrayList<Rule> e1 = new ArrayList<Rule>();
+        int s1 = context.index;
+        parsed = true;
+        if (parsed)
         {
           boolean f1 = true;
           int c1 = 0;
           for (int i1 = 0; i1 < 1 && f1; i1++)
           {
-            rule = Rule_COLON.parse(context);
+            rule = Terminal_StringValue.parse(context, "static");
             if ((f1 = rule != null))
             {
               e1.add(rule);
@@ -107,12 +142,51 @@ final public class Rule_smaliFieldRef extends Rule
           parsed = c1 == 1;
         }
         if (parsed)
+          e0.addAll(e1);
+        else
+          context.index = s1;
+      }
+    }
+    if (!parsed)
+    {
+      {
+        ArrayList<Rule> e1 = new ArrayList<Rule>();
+        int s1 = context.index;
+        parsed = true;
+        if (parsed)
         {
           boolean f1 = true;
           int c1 = 0;
           for (int i1 = 0; i1 < 1 && f1; i1++)
           {
-            rule = Rule_type.parse(context);
+            rule = Terminal_StringValue.parse(context, "final");
+            if ((f1 = rule != null))
+            {
+              e1.add(rule);
+              c1++;
+            }
+          }
+          parsed = c1 == 1;
+        }
+        if (parsed)
+          e0.addAll(e1);
+        else
+          context.index = s1;
+      }
+    }
+    if (!parsed)
+    {
+      {
+        ArrayList<Rule> e1 = new ArrayList<Rule>();
+        int s1 = context.index;
+        parsed = true;
+        if (parsed)
+        {
+          boolean f1 = true;
+          int c1 = 0;
+          for (int i1 = 0; i1 < 1 && f1; i1++)
+          {
+            rule = Terminal_StringValue.parse(context, "abstract");
             if ((f1 = rule != null))
             {
               e1.add(rule);
@@ -130,13 +204,13 @@ final public class Rule_smaliFieldRef extends Rule
 
     rule = null;
     if (parsed)
-      rule = new Rule_smaliFieldRef(context.text.substring(s0, context.index), e0);
+      rule = new Rule_accessMode(context.text.substring(s0, context.index), e0);
     else
       context.index = s0;
 
-    context.pop("smaliFieldRef", parsed);
+    context.pop("accessMode", parsed);
 
-    return (Rule_smaliFieldRef)rule;
+    return (Rule_accessMode)rule;
   }
 }
 

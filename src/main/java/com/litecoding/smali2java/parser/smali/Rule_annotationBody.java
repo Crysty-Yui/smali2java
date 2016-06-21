@@ -14,12 +14,9 @@ import java.util.ArrayList;
 
 import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
-import com.litecoding.smali2java.parser.Rule_strValue;
 import com.litecoding.smali2java.parser.Terminal_StringValue;
 import com.litecoding.smali2java.parser.Visitor;
 import com.litecoding.smali2java.parser.text.Rule_COMMA;
-import com.litecoding.smali2java.parser.text.whitespacecharacters.Rule_optPadding;
-import com.litecoding.smali2java.parser.text.whitespacecharacters.Rule_optWidePadding;
 
 final public class Rule_annotationBody extends Rule
 {

@@ -1,5 +1,5 @@
 /* -----------------------------------------------------------------------------
- * Rule_smaliMethodRef.java
+ * Rule_widePadding.java
  * -----------------------------------------------------------------------------
  *
  * Producer : com.parse2.aparse.Parser 2.3
@@ -14,13 +14,13 @@ import java.util.ArrayList;
 
 import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
-import com.litecoding.smali2java.parser.Terminal_StringValue;
 import com.litecoding.smali2java.parser.Visitor;
-import com.litecoding.smali2java.parser.method.Rule_classMethodProto;
+import com.litecoding.smali2java.parser.text.Rule_CRLF;
 
-final public class Rule_smaliMethodRef extends Rule
+// 空格、制表符、回车、换行
+final public class Rule_widePadding extends Rule
 {
-  private Rule_smaliMethodRef(String spelling, ArrayList<Rule> rules)
+  private Rule_widePadding(String spelling, ArrayList<Rule> rules)
   {
     super(spelling, rules);
   }
@@ -30,9 +30,9 @@ final public class Rule_smaliMethodRef extends Rule
     return visitor.visit(this);
   }
 
-  public static Rule_smaliMethodRef parse(ParserContext context)
+  public static Rule_widePadding parse(ParserContext context)
   {
-    context.push("smaliMethodRef");
+    context.push("widePadding");
 
     boolean parsed = true;
     int s0 = context.index;
@@ -46,36 +46,6 @@ final public class Rule_smaliMethodRef extends Rule
         ArrayList<Rule> e1 = new ArrayList<Rule>();
         int s1 = context.index;
         parsed = true;
-        if (parsed)
-        {
-          boolean f1 = true;
-          int c1 = 0;
-          for (int i1 = 0; i1 < 1 && f1; i1++)
-          {
-            rule = Rule_className.parse(context);
-            if ((f1 = rule != null))
-            {
-              e1.add(rule);
-              c1++;
-            }
-          }
-          parsed = c1 == 1;
-        }
-        if (parsed)
-        {
-          boolean f1 = true;
-          int c1 = 0;
-          for (int i1 = 0; i1 < 1 && f1; i1++)
-          {
-            rule = Terminal_StringValue.parse(context, "->");
-            if ((f1 = rule != null))
-            {
-              e1.add(rule);
-              c1++;
-            }
-          }
-          parsed = c1 == 1;
-        }
         if (parsed)
         {
           boolean f1 = true;
@@ -96,7 +66,7 @@ final public class Rule_smaliMethodRef extends Rule
                   int c2 = 0;
                   for (int i2 = 0; i2 < 1 && f2; i2++)
                   {
-                    rule = Rule_smaliConstructorName.parse(context);
+                    rule = Rule_padding.parse(context);
                     if ((f2 = rule != null))
                     {
                       e2.add(rule);
@@ -123,7 +93,7 @@ final public class Rule_smaliMethodRef extends Rule
                   int c2 = 0;
                   for (int i2 = 0; i2 < 1 && f2; i2++)
                   {
-                    rule = Rule_qualifier.parse(context);
+                    rule = Rule_CRLF.parse(context);
                     if ((f2 = rule != null))
                     {
                       e2.add(rule);
@@ -141,22 +111,68 @@ final public class Rule_smaliMethodRef extends Rule
             f1 = context.index > g1;
             if (parsed) c1++;
           }
-          parsed = c1 == 1;
-        }
-        if (parsed)
-        {
-          boolean f1 = true;
-          int c1 = 0;
-          for (int i1 = 0; i1 < 1 && f1; i1++)
+          while (f1)
           {
-            rule = Rule_classMethodProto.parse(context);
-            if ((f1 = rule != null))
+            int g1 = context.index;
+            parsed = false;
+            if (!parsed)
             {
-              e1.add(rule);
-              c1++;
+              {
+                ArrayList<Rule> e2 = new ArrayList<Rule>();
+                int s2 = context.index;
+                parsed = true;
+                if (parsed)
+                {
+                  boolean f2 = true;
+                  int c2 = 0;
+                  for (int i2 = 0; i2 < 1 && f2; i2++)
+                  {
+                    rule = Rule_padding.parse(context);
+                    if ((f2 = rule != null))
+                    {
+                      e2.add(rule);
+                      c2++;
+                    }
+                  }
+                  parsed = c2 == 1;
+                }
+                if (parsed)
+                  e1.addAll(e2);
+                else
+                  context.index = s2;
+              }
             }
+            if (!parsed)
+            {
+              {
+                ArrayList<Rule> e2 = new ArrayList<Rule>();
+                int s2 = context.index;
+                parsed = true;
+                if (parsed)
+                {
+                  boolean f2 = true;
+                  int c2 = 0;
+                  for (int i2 = 0; i2 < 1 && f2; i2++)
+                  {
+                    rule = Rule_CRLF.parse(context);
+                    if ((f2 = rule != null))
+                    {
+                      e2.add(rule);
+                      c2++;
+                    }
+                  }
+                  parsed = c2 == 1;
+                }
+                if (parsed)
+                  e1.addAll(e2);
+                else
+                  context.index = s2;
+              }
+            }
+            f1 = context.index > g1;
+            if (parsed) c1++;
           }
-          parsed = c1 == 1;
+          parsed = c1 >= 1;
         }
         if (parsed)
           e0.addAll(e1);
@@ -167,13 +183,13 @@ final public class Rule_smaliMethodRef extends Rule
 
     rule = null;
     if (parsed)
-      rule = new Rule_smaliMethodRef(context.text.substring(s0, context.index), e0);
+      rule = new Rule_widePadding(context.text.substring(s0, context.index), e0);
     else
       context.index = s0;
 
-    context.pop("smaliMethodRef", parsed);
+    context.pop("widePadding", parsed);
 
-    return (Rule_smaliMethodRef)rule;
+    return (Rule_widePadding)rule;
   }
 }
 

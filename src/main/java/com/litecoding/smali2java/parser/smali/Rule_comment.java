@@ -1,5 +1,5 @@
 /* -----------------------------------------------------------------------------
- * Rule_codeLabel.java
+ * Rule_comment.java
  * -----------------------------------------------------------------------------
  *
  * Producer : com.parse2.aparse.Parser 2.3
@@ -14,13 +14,13 @@ import java.util.ArrayList;
 
 import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
-import com.litecoding.smali2java.parser.Rule_qualifier;
 import com.litecoding.smali2java.parser.Visitor;
-import com.litecoding.smali2java.parser.text.Rule_COLON;
+import com.litecoding.smali2java.parser.text.Rule_CRLF;
 
-final public class Rule_codeLabel extends Rule
+// 注解
+final public class Rule_comment extends Rule
 {
-  private Rule_codeLabel(String spelling, ArrayList<Rule> rules)
+  private Rule_comment(String spelling, ArrayList<Rule> rules)
   {
     super(spelling, rules);
   }
@@ -30,9 +30,9 @@ final public class Rule_codeLabel extends Rule
     return visitor.visit(this);
   }
 
-  public static Rule_codeLabel parse(ParserContext context)
+  public static Rule_comment parse(ParserContext context)
   {
-    context.push("codeLabel");
+    context.push("comment");
 
     boolean parsed = true;
     int s0 = context.index;
@@ -52,7 +52,7 @@ final public class Rule_codeLabel extends Rule
           int c1 = 0;
           for (int i1 = 0; i1 < 1 && f1; i1++)
           {
-            rule = Rule_COLON.parse(context);
+            rule = Rule_optPadding.parse(context);
             if ((f1 = rule != null))
             {
               e1.add(rule);
@@ -67,7 +67,22 @@ final public class Rule_codeLabel extends Rule
           int c1 = 0;
           for (int i1 = 0; i1 < 1 && f1; i1++)
           {
-            rule = Rule_qualifier.parse(context);
+            rule = Rule_commentSequence.parse(context);
+            if ((f1 = rule != null))
+            {
+              e1.add(rule);
+              c1++;
+            }
+          }
+          parsed = c1 == 1;
+        }
+        if (parsed)
+        {
+          boolean f1 = true;
+          int c1 = 0;
+          for (int i1 = 0; i1 < 1 && f1; i1++)
+          {
+            rule = Rule_CRLF.parse(context);
             if ((f1 = rule != null))
             {
               e1.add(rule);
@@ -85,13 +100,13 @@ final public class Rule_codeLabel extends Rule
 
     rule = null;
     if (parsed)
-      rule = new Rule_codeLabel(context.text.substring(s0, context.index), e0);
+      rule = new Rule_comment(context.text.substring(s0, context.index), e0);
     else
       context.index = s0;
 
-    context.pop("codeLabel", parsed);
+    context.pop("comment", parsed);
 
-    return (Rule_codeLabel)rule;
+    return (Rule_comment)rule;
   }
 }
 

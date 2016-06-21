@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
 import com.litecoding.smali2java.parser.Visitor;
-import com.litecoding.smali2java.parser.clazz.Rule_className;
 
 final public class Rule_smaliClassRef extends Rule
 {

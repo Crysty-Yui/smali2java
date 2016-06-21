@@ -16,7 +16,6 @@ import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
 import com.litecoding.smali2java.parser.Terminal_StringValue;
 import com.litecoding.smali2java.parser.Visitor;
-import com.litecoding.smali2java.parser.text.whitespacecharacters.Rule_padding;
 
 final public class Rule_dirEndSubannotation extends Rule
 {

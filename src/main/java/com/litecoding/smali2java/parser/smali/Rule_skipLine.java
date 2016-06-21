@@ -1,5 +1,5 @@
 /* -----------------------------------------------------------------------------
- * Rule_intValue.java
+ * Rule_skipLine.java
  * -----------------------------------------------------------------------------
  *
  * Producer : com.parse2.aparse.Parser 2.3
@@ -16,9 +16,9 @@ import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
 import com.litecoding.smali2java.parser.Visitor;
 
-final public class Rule_intValue extends Rule
+final public class Rule_skipLine extends Rule
 {
-  private Rule_intValue(String spelling, ArrayList<Rule> rules)
+  private Rule_skipLine(String spelling, ArrayList<Rule> rules)
   {
     super(spelling, rules);
   }
@@ -28,9 +28,9 @@ final public class Rule_intValue extends Rule
     return visitor.visit(this);
   }
 
-  public static Rule_intValue parse(ParserContext context)
+  public static Rule_skipLine parse(ParserContext context)
   {
-    context.push("intValue");
+    context.push("skipLine");
 
     boolean parsed = true;
     int s0 = context.index;
@@ -38,6 +38,9 @@ final public class Rule_intValue extends Rule
     Rule rule;
 
     parsed = false;
+    
+    /* 注解 */
+    
     if (!parsed)
     {
       {
@@ -50,7 +53,7 @@ final public class Rule_intValue extends Rule
           int c1 = 0;
           for (int i1 = 0; i1 < 1 && f1; i1++)
           {
-            rule = Rule_intHexValue.parse(context);
+            rule = Rule_comment.parse(context);
             if ((f1 = rule != null))
             {
               e1.add(rule);
@@ -77,7 +80,7 @@ final public class Rule_intValue extends Rule
           int c1 = 0;
           for (int i1 = 0; i1 < 1 && f1; i1++)
           {
-            rule = Rule_intDecValue.parse(context);
+            rule = Rule_emptyLine.parse(context);
             if ((f1 = rule != null))
             {
               e1.add(rule);
@@ -95,14 +98,24 @@ final public class Rule_intValue extends Rule
 
     rule = null;
     if (parsed)
-      rule = new Rule_intValue(context.text.substring(s0, context.index), e0);
+      rule = new Rule_skipLine(context.text.substring(s0, context.index), e0);
     else
       context.index = s0;
 
-    context.pop("intValue", parsed);
+    context.pop("skipLine", parsed);
 
-    return (Rule_intValue)rule;
+    return (Rule_skipLine)rule;
   }
+
+	public static void main(String[] args) {
+		String line = "# instance fields\n";
+		ParserContext context = new ParserContext(line, true);
+		Rule rule = parse(context);
+		if (rule != null) {
+			System.out.println("rule: " + rule.rules);
+			System.out.println(line.length() == rule.toString().length());
+		}
+	}
 }
 
 /* -----------------------------------------------------------------------------
