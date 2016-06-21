@@ -12,10 +12,10 @@ package com.litecoding.smali2java.parser.cmd.div;
 
 import java.util.ArrayList;
 
+import com.litecoding.smali2java.builder.Visitor;
 import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
 import com.litecoding.smali2java.parser.Terminal_StringValue;
-import com.litecoding.smali2java.parser.Visitor;
 import com.litecoding.smali2java.parser.smali.Rule_codeRegister64;
 import com.litecoding.smali2java.parser.smali.Rule_codeRegisterV64Dst;
 import com.litecoding.smali2java.parser.smali.Rule_commentSequence;
