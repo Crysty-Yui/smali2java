@@ -12,39 +12,37 @@ package com.litecoding.smali2java.parser;
 
 import java.util.ArrayList;
 
-public abstract class Rule
-{
-  public final String spelling;
-  public final ArrayList<Rule> rules = new ArrayList<Rule>();
+public abstract class Rule {
 
-  protected Rule(String spelling, ArrayList<Rule> rules)
-  {
-    this.spelling = spelling;
-    if (rules != null)
-    this.rules.addAll(rules);
-  }
+	public final String spelling;
+	public final ArrayList<Rule> rules = new ArrayList<Rule>();
 
-  public String toString()
-  {
-    return spelling;
-  }
+	protected Rule(String spelling, ArrayList<Rule> rules) {
+		this.spelling = spelling;
+		if (rules != null)
+			this.rules.addAll(rules);
+	}
 
-  public boolean equals(Object object)
-  {
-    return object instanceof Rule && spelling.equals(((Rule)object).spelling);
-  }
+	@Override
+	public String toString() {
+		return spelling;
+	}
 
-  public int hashCode()
-  {
-    return spelling.hashCode();
-  }
+	@Override
+	public boolean equals(Object object) {
+		return object instanceof Rule && spelling.equals(((Rule) object).spelling);
+	}
 
-  public int compareTo(Rule rule)
-  {
-    return spelling.compareTo(rule.spelling);
-  }
+	@Override
+	public int hashCode() {
+		return spelling.hashCode();
+	}
 
-  public abstract Object accept(Visitor visitor);
+	public int compareTo(Rule rule) {
+		return spelling.compareTo(rule.spelling);
+	}
+
+	public abstract Object accept(Visitor visitor);
 }
 
 /* -----------------------------------------------------------------------------
