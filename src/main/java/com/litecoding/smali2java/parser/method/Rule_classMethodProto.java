@@ -13,12 +13,12 @@ package com.litecoding.smali2java.parser.method;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.litecoding.smali2java.SmaliClassBuilder;
+import com.litecoding.smali2java.builder.SmaliClassBuilder;
+import com.litecoding.smali2java.builder.Visitor;
 import com.litecoding.smali2java.entity.smali.Param;
 import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
 import com.litecoding.smali2java.parser.Terminal_NumericValue;
-import com.litecoding.smali2java.parser.Visitor;
 import com.litecoding.smali2java.parser.smali.Rule_type;
 
 // 方法参数

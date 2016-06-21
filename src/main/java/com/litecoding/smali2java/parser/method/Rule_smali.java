@@ -16,11 +16,11 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
-import com.litecoding.smali2java.SmaliClassBuilder;
+import com.litecoding.smali2java.builder.SmaliClassBuilder;
+import com.litecoding.smali2java.builder.Visitor;
 import com.litecoding.smali2java.entity.smali.SmaliClass;
 import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
-import com.litecoding.smali2java.parser.Visitor;
 import com.litecoding.smali2java.parser.smali.Rule_skipLine;
 import com.litecoding.smali2java.renderer.ClassRenderer;
 
