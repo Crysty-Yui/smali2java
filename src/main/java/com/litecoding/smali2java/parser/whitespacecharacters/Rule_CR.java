@@ -82,7 +82,9 @@ final public class Rule_CR extends Rule
 	public static void main(String[] args) {
 		ParserContext context = new ParserContext("\r", true);
 		Rule rule = parse(context);
-		System.out.println("rule: " + rule);
+		if (rule != null) {
+			System.out.println("rule: " + rule.rules);
+		}
 	}
 }
 

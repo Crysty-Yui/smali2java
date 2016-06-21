@@ -77,6 +77,12 @@ final public class Rule_HTAB extends Rule
 
     return (Rule_HTAB)rule;
   }
+
+	public static void main(String[] args) {
+		ParserContext context = new ParserContext("\t", true);
+		Rule rule = parse(context);
+		System.out.println("rule: " + rule);
+	}
 }
 
 /* -----------------------------------------------------------------------------

@@ -16,6 +16,7 @@ import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
 import com.litecoding.smali2java.parser.Visitor;
 
+// 空格、制表符、回车、换行
 final public class Rule_widePadding extends Rule
 {
   private Rule_widePadding(String spelling, ArrayList<Rule> rules)

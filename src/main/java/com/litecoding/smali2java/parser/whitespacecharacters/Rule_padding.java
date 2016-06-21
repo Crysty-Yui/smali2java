@@ -14,9 +14,9 @@ import java.util.ArrayList;
 
 import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
-import com.litecoding.smali2java.parser.Rule_HTAB;
 import com.litecoding.smali2java.parser.Visitor;
 
+// 空格或制表符
 final public class Rule_padding extends Rule
 {
   private Rule_padding(String spelling, ArrayList<Rule> rules)
@@ -53,6 +53,9 @@ final public class Rule_padding extends Rule
           {
             int g1 = context.index;
             parsed = false;
+            
+            /* 空格 */
+            
             if (!parsed)
             {
               {
@@ -80,6 +83,9 @@ final public class Rule_padding extends Rule
                   context.index = s2;
               }
             }
+            
+            /* \t */
+            
             if (!parsed)
             {
               {
@@ -190,6 +196,12 @@ final public class Rule_padding extends Rule
 
     return (Rule_padding)rule;
   }
+
+	public static void main(String[] args) {
+		ParserContext context = new ParserContext("    \t\t \t", true);
+		Rule rule = parse(context);
+		System.out.println("rule: " + rule.rules.size());
+	}
 }
 
 /* -----------------------------------------------------------------------------
