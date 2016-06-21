@@ -1,5 +1,5 @@
 /* -----------------------------------------------------------------------------
- * Rule_methodBody.java
+ * Rule_classField.java
  * -----------------------------------------------------------------------------
  *
  * Producer : com.parse2.aparse.Parser 2.3
@@ -15,14 +15,21 @@ import java.util.ArrayList;
 import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
 import com.litecoding.smali2java.parser.Visitor;
-import com.litecoding.smali2java.parser.cmd.Rule_cmdAny;
-import com.litecoding.smali2java.parser.smali.Rule_annotation;
-import com.litecoding.smali2java.parser.smali.Rule_label;
-import com.litecoding.smali2java.parser.smali.Rule_skipLine;
+import com.litecoding.smali2java.parser.smali.Rule_accessMode;
+import com.litecoding.smali2java.parser.smali.Rule_dirEndField;
+import com.litecoding.smali2java.parser.smali.Rule_dirField;
+import com.litecoding.smali2java.parser.smali.Rule_optPadding;
+import com.litecoding.smali2java.parser.smali.Rule_padding;
+import com.litecoding.smali2java.parser.smali.Rule_qualifier;
+import com.litecoding.smali2java.parser.smali.Rule_type;
+import com.litecoding.smali2java.parser.smali.Rule_value;
+import com.litecoding.smali2java.parser.text.Rule_COLON;
+import com.litecoding.smali2java.parser.text.Rule_CRLF;
+import com.litecoding.smali2java.parser.text.Rule_EQ;
 
-final public class Rule_methodBody extends Rule
+final public class Rule_classField extends Rule
 {
-  private Rule_methodBody(String spelling, ArrayList<Rule> rules)
+  private Rule_classField(String spelling, ArrayList<Rule> rules)
   {
     super(spelling, rules);
   }
@@ -32,9 +39,9 @@ final public class Rule_methodBody extends Rule
     return visitor.visit(this);
   }
 
-  public static Rule_methodBody parse(ParserContext context)
+  public static Rule_classField parse(ParserContext context)
   {
-    context.push("methodBody");
+    context.push("classField");
 
     boolean parsed = true;
     int s0 = context.index;
@@ -51,116 +58,47 @@ final public class Rule_methodBody extends Rule
         if (parsed)
         {
           boolean f1 = true;
-          @SuppressWarnings("unused")
           int c1 = 0;
-          while (f1)
+          for (int i1 = 0; i1 < 1 && f1; i1++)
           {
-            rule = Rule_skipLine.parse(context);
+            rule = Rule_optPadding.parse(context);
             if ((f1 = rule != null))
             {
               e1.add(rule);
               c1++;
             }
           }
-          parsed = true;
+          parsed = c1 == 1;
         }
         if (parsed)
         {
           boolean f1 = true;
-          @SuppressWarnings("unused")
           int c1 = 0;
           for (int i1 = 0; i1 < 1 && f1; i1++)
           {
-            int g1 = context.index;
-            parsed = false;
-            if (!parsed)
-            {
-              {
-                ArrayList<Rule> e2 = new ArrayList<Rule>();
-                int s2 = context.index;
-                parsed = true;
-                if (parsed)
-                {
-                  boolean f2 = true;
-                  int c2 = 0;
-                  for (int i2 = 0; i2 < 1 && f2; i2++)
-                  {
-                    rule = Rule_methodLocals.parse(context);
-                    if ((f2 = rule != null))
-                    {
-                      e2.add(rule);
-                      c2++;
-                    }
-                  }
-                  parsed = c2 == 1;
-                }
-                if (parsed)
-                  e1.addAll(e2);
-                else
-                  context.index = s2;
-              }
-            }
-            f1 = context.index > g1;
-            if (parsed) c1++;
-          }
-          parsed = true;
-        }
-        if (parsed)
-        {
-          boolean f1 = true;
-          @SuppressWarnings("unused")
-          int c1 = 0;
-          while (f1)
-          {
-            rule = Rule_skipLine.parse(context);
+            rule = Rule_dirField.parse(context);
             if ((f1 = rule != null))
             {
               e1.add(rule);
               c1++;
             }
           }
-          parsed = true;
+          parsed = c1 == 1;
         }
         if (parsed)
         {
           boolean f1 = true;
-          @SuppressWarnings("unused")
           int c1 = 0;
           for (int i1 = 0; i1 < 1 && f1; i1++)
           {
-            int g1 = context.index;
-            parsed = false;
-            if (!parsed)
+            rule = Rule_padding.parse(context);
+            if ((f1 = rule != null))
             {
-              {
-                ArrayList<Rule> e2 = new ArrayList<Rule>();
-                int s2 = context.index;
-                parsed = true;
-                if (parsed)
-                {
-                  boolean f2 = true;
-                  int c2 = 0;
-                  for (int i2 = 0; i2 < 1 && f2; i2++)
-                  {
-                    rule = Rule_methodRegisters.parse(context);
-                    if ((f2 = rule != null))
-                    {
-                      e2.add(rule);
-                      c2++;
-                    }
-                  }
-                  parsed = c2 == 1;
-                }
-                if (parsed)
-                  e1.addAll(e2);
-                else
-                  context.index = s2;
-              }
+              e1.add(rule);
+              c1++;
             }
-            f1 = context.index > g1;
-            if (parsed) c1++;
           }
-          parsed = true;
+          parsed = c1 == 1;
         }
         if (parsed)
         {
@@ -183,7 +121,7 @@ final public class Rule_methodBody extends Rule
                   int c2 = 0;
                   for (int i2 = 0; i2 < 1 && f2; i2++)
                   {
-                    rule = Rule_methodParam.parse(context);
+                    rule = Rule_accessMode.parse(context);
                     if ((f2 = rule != null))
                     {
                       e2.add(rule);
@@ -193,51 +131,12 @@ final public class Rule_methodBody extends Rule
                   parsed = c2 == 1;
                 }
                 if (parsed)
-                  e1.addAll(e2);
-                else
-                  context.index = s2;
-              }
-            }
-            if (!parsed)
-            {
-              {
-                ArrayList<Rule> e2 = new ArrayList<Rule>();
-                int s2 = context.index;
-                parsed = true;
-                if (parsed)
                 {
                   boolean f2 = true;
                   int c2 = 0;
                   for (int i2 = 0; i2 < 1 && f2; i2++)
                   {
-                    rule = Rule_annotation.parse(context);
-                    if ((f2 = rule != null))
-                    {
-                      e2.add(rule);
-                      c2++;
-                    }
-                  }
-                  parsed = c2 == 1;
-                }
-                if (parsed)
-                  e1.addAll(e2);
-                else
-                  context.index = s2;
-              }
-            }
-            if (!parsed)
-            {
-              {
-                ArrayList<Rule> e2 = new ArrayList<Rule>();
-                int s2 = context.index;
-                parsed = true;
-                if (parsed)
-                {
-                  boolean f2 = true;
-                  int c2 = 0;
-                  for (int i2 = 0; i2 < 1 && f2; i2++)
-                  {
-                    rule = Rule_skipLine.parse(context);
+                    rule = Rule_padding.parse(context);
                     if ((f2 = rule != null))
                     {
                       e2.add(rule);
@@ -256,6 +155,66 @@ final public class Rule_methodBody extends Rule
             if (parsed) c1++;
           }
           parsed = true;
+        }
+        if (parsed)
+        {
+          boolean f1 = true;
+          int c1 = 0;
+          for (int i1 = 0; i1 < 1 && f1; i1++)
+          {
+            rule = Rule_qualifier.parse(context);
+            if ((f1 = rule != null))
+            {
+              e1.add(rule);
+              c1++;
+            }
+          }
+          parsed = c1 == 1;
+        }
+        if (parsed)
+        {
+          boolean f1 = true;
+          int c1 = 0;
+          for (int i1 = 0; i1 < 1 && f1; i1++)
+          {
+            rule = Rule_COLON.parse(context);
+            if ((f1 = rule != null))
+            {
+              e1.add(rule);
+              c1++;
+            }
+          }
+          parsed = c1 == 1;
+        }
+        if (parsed)
+        {
+          boolean f1 = true;
+          int c1 = 0;
+          for (int i1 = 0; i1 < 1 && f1; i1++)
+          {
+            rule = Rule_type.parse(context);
+            if ((f1 = rule != null))
+            {
+              e1.add(rule);
+              c1++;
+            }
+          }
+          parsed = c1 == 1;
+        }
+        if (parsed)
+        {
+          boolean f1 = true;
+          int c1 = 0;
+          for (int i1 = 0; i1 < 1 && f1; i1++)
+          {
+            rule = Rule_optPadding.parse(context);
+            if ((f1 = rule != null))
+            {
+              e1.add(rule);
+              c1++;
+            }
+          }
+          parsed = c1 == 1;
         }
         if (parsed)
         {
@@ -278,7 +237,37 @@ final public class Rule_methodBody extends Rule
                   int c2 = 0;
                   for (int i2 = 0; i2 < 1 && f2; i2++)
                   {
-                    rule = Rule_methodPrologue.parse(context);
+                    rule = Rule_EQ.parse(context);
+                    if ((f2 = rule != null))
+                    {
+                      e2.add(rule);
+                      c2++;
+                    }
+                  }
+                  parsed = c2 == 1;
+                }
+                if (parsed)
+                {
+                  boolean f2 = true;
+                  int c2 = 0;
+                  for (int i2 = 0; i2 < 1 && f2; i2++)
+                  {
+                    rule = Rule_optPadding.parse(context);
+                    if ((f2 = rule != null))
+                    {
+                      e2.add(rule);
+                      c2++;
+                    }
+                  }
+                  parsed = c2 == 1;
+                }
+                if (parsed)
+                {
+                  boolean f2 = true;
+                  int c2 = 0;
+                  for (int i2 = 0; i2 < 1 && f2; i2++)
+                  {
+                    rule = Rule_value.parse(context);
                     if ((f2 = rule != null))
                     {
                       e2.add(rule);
@@ -301,9 +290,39 @@ final public class Rule_methodBody extends Rule
         if (parsed)
         {
           boolean f1 = true;
+          int c1 = 0;
+          for (int i1 = 0; i1 < 1 && f1; i1++)
+          {
+            rule = Rule_optPadding.parse(context);
+            if ((f1 = rule != null))
+            {
+              e1.add(rule);
+              c1++;
+            }
+          }
+          parsed = c1 == 1;
+        }
+        if (parsed)
+        {
+          boolean f1 = true;
+          int c1 = 0;
+          for (int i1 = 0; i1 < 1 && f1; i1++)
+          {
+            rule = Rule_CRLF.parse(context);
+            if ((f1 = rule != null))
+            {
+              e1.add(rule);
+              c1++;
+            }
+          }
+          parsed = c1 == 1;
+        }
+        if (parsed)
+        {
+          boolean f1 = true;
           @SuppressWarnings("unused")
           int c1 = 0;
-          while (f1)
+          for (int i1 = 0; i1 < 1 && f1; i1++)
           {
             int g1 = context.index;
             parsed = false;
@@ -319,7 +338,7 @@ final public class Rule_methodBody extends Rule
                   int c2 = 0;
                   for (int i2 = 0; i2 < 1 && f2; i2++)
                   {
-                    rule = Rule_methodLine.parse(context);
+                    rule = Rule_dirEndField.parse(context);
                     if ((f2 = rule != null))
                     {
                       e2.add(rule);
@@ -329,24 +348,12 @@ final public class Rule_methodBody extends Rule
                   parsed = c2 == 1;
                 }
                 if (parsed)
-                  e1.addAll(e2);
-                else
-                  context.index = s2;
-              }
-            }
-            if (!parsed)
-            {
-              {
-                ArrayList<Rule> e2 = new ArrayList<Rule>();
-                int s2 = context.index;
-                parsed = true;
-                if (parsed)
                 {
                   boolean f2 = true;
                   int c2 = 0;
                   for (int i2 = 0; i2 < 1 && f2; i2++)
                   {
-                    rule = Rule_methodLocal.parse(context);
+                    rule = Rule_optPadding.parse(context);
                     if ((f2 = rule != null))
                     {
                       e2.add(rule);
@@ -356,78 +363,12 @@ final public class Rule_methodBody extends Rule
                   parsed = c2 == 1;
                 }
                 if (parsed)
-                  e1.addAll(e2);
-                else
-                  context.index = s2;
-              }
-            }
-            if (!parsed)
-            {
-              {
-                ArrayList<Rule> e2 = new ArrayList<Rule>();
-                int s2 = context.index;
-                parsed = true;
-                if (parsed)
                 {
                   boolean f2 = true;
                   int c2 = 0;
                   for (int i2 = 0; i2 < 1 && f2; i2++)
                   {
-                    rule = Rule_cmdAny.parse(context);
-                    if ((f2 = rule != null))
-                    {
-                      e2.add(rule);
-                      c2++;
-                    }
-                  }
-                  parsed = c2 == 1;
-                }
-                if (parsed)
-                  e1.addAll(e2);
-                else
-                  context.index = s2;
-              }
-            }
-            if (!parsed)
-            {
-              {
-                ArrayList<Rule> e2 = new ArrayList<Rule>();
-                int s2 = context.index;
-                parsed = true;
-                if (parsed)
-                {
-                  boolean f2 = true;
-                  int c2 = 0;
-                  for (int i2 = 0; i2 < 1 && f2; i2++)
-                  {
-                    rule = Rule_label.parse(context);
-                    if ((f2 = rule != null))
-                    {
-                      e2.add(rule);
-                      c2++;
-                    }
-                  }
-                  parsed = c2 == 1;
-                }
-                if (parsed)
-                  e1.addAll(e2);
-                else
-                  context.index = s2;
-              }
-            }
-            if (!parsed)
-            {
-              {
-                ArrayList<Rule> e2 = new ArrayList<Rule>();
-                int s2 = context.index;
-                parsed = true;
-                if (parsed)
-                {
-                  boolean f2 = true;
-                  int c2 = 0;
-                  for (int i2 = 0; i2 < 1 && f2; i2++)
-                  {
-                    rule = Rule_skipLine.parse(context);
+                    rule = Rule_CRLF.parse(context);
                     if ((f2 = rule != null))
                     {
                       e2.add(rule);
@@ -456,14 +397,20 @@ final public class Rule_methodBody extends Rule
 
     rule = null;
     if (parsed)
-      rule = new Rule_methodBody(context.text.substring(s0, context.index), e0);
+      rule = new Rule_classField(context.text.substring(s0, context.index), e0);
     else
       context.index = s0;
 
-    context.pop("methodBody", parsed);
+    context.pop("classField", parsed);
 
-    return (Rule_methodBody)rule;
+    return (Rule_classField)rule;
   }
+
+	public static void main(String[] args) {
+		ParserContext context = new ParserContext(".field private tempJ:I\n", true);
+		Rule rule = parse(context);
+		System.out.println("rule: " + rule);
+	}
 }
 
 /* -----------------------------------------------------------------------------

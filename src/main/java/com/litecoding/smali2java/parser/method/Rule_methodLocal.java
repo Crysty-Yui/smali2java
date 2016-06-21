@@ -1,5 +1,5 @@
 /* -----------------------------------------------------------------------------
- * Rule_classMethodProto.java
+ * Rule_methodLocal.java
  * -----------------------------------------------------------------------------
  *
  * Producer : com.parse2.aparse.Parser 2.3
@@ -11,20 +11,19 @@
 package com.litecoding.smali2java.parser.method;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import com.litecoding.smali2java.SmaliClassBuilder;
-import com.litecoding.smali2java.entity.smali.Param;
 import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
-import com.litecoding.smali2java.parser.Terminal_NumericValue;
+import com.litecoding.smali2java.parser.Terminal_StringValue;
 import com.litecoding.smali2java.parser.Visitor;
-import com.litecoding.smali2java.parser.smali.Rule_type;
+import com.litecoding.smali2java.parser.smali.Rule_optPadding;
+import com.litecoding.smali2java.parser.smali.Rule_padding;
+import com.litecoding.smali2java.parser.smali.Rule_todoStubLine;
+import com.litecoding.smali2java.parser.text.Rule_CRLF;
 
-// 方法参数
-final public class Rule_classMethodProto extends Rule
+final public class Rule_methodLocal extends Rule
 {
-  private Rule_classMethodProto(String spelling, ArrayList<Rule> rules)
+  private Rule_methodLocal(String spelling, ArrayList<Rule> rules)
   {
     super(spelling, rules);
   }
@@ -34,9 +33,9 @@ final public class Rule_classMethodProto extends Rule
     return visitor.visit(this);
   }
 
-  public static Rule_classMethodProto parse(ParserContext context)
+  public static Rule_methodLocal parse(ParserContext context)
   {
-    context.push("classMethodProto");
+    context.push("methodLocal");
 
     boolean parsed = true;
     int s0 = context.index;
@@ -56,38 +55,7 @@ final public class Rule_classMethodProto extends Rule
           int c1 = 0;
           for (int i1 = 0; i1 < 1 && f1; i1++)
           {
-            rule = Terminal_NumericValue.parse(context, "%x28", "[\\x28]", 1);
-            if ((f1 = rule != null))
-            {
-              e1.add(rule);
-              c1++;
-            }
-          }
-          parsed = c1 == 1;
-        }
-        if (parsed)
-        {
-          boolean f1 = true;
-          @SuppressWarnings("unused")
-          int c1 = 0;
-          while (f1)
-          {
-            rule = Rule_type.parse(context);
-            if ((f1 = rule != null))
-            {
-              e1.add(rule);
-              c1++;
-            }
-          }
-          parsed = true;
-        }
-        if (parsed)
-        {
-          boolean f1 = true;
-          int c1 = 0;
-          for (int i1 = 0; i1 < 1 && f1; i1++)
-          {
-            rule = Terminal_NumericValue.parse(context, "%x29", "[\\x29]", 1);
+            rule = Rule_optPadding.parse(context);
             if ((f1 = rule != null))
             {
               e1.add(rule);
@@ -102,7 +70,52 @@ final public class Rule_classMethodProto extends Rule
           int c1 = 0;
           for (int i1 = 0; i1 < 1 && f1; i1++)
           {
-            rule = Rule_type.parse(context);
+            rule = Terminal_StringValue.parse(context, ".local");
+            if ((f1 = rule != null))
+            {
+              e1.add(rule);
+              c1++;
+            }
+          }
+          parsed = c1 == 1;
+        }
+        if (parsed)
+        {
+          boolean f1 = true;
+          int c1 = 0;
+          for (int i1 = 0; i1 < 1 && f1; i1++)
+          {
+            rule = Rule_padding.parse(context);
+            if ((f1 = rule != null))
+            {
+              e1.add(rule);
+              c1++;
+            }
+          }
+          parsed = c1 == 1;
+        }
+        if (parsed)
+        {
+          boolean f1 = true;
+          int c1 = 0;
+          for (int i1 = 0; i1 < 1 && f1; i1++)
+          {
+            rule = Rule_todoStubLine.parse(context);
+            if ((f1 = rule != null))
+            {
+              e1.add(rule);
+              c1++;
+            }
+          }
+          parsed = c1 == 1;
+        }
+        if (parsed)
+        {
+          boolean f1 = true;
+          int c1 = 0;
+          for (int i1 = 0; i1 < 1 && f1; i1++)
+          {
+            rule = Rule_CRLF.parse(context);
             if ((f1 = rule != null))
             {
               e1.add(rule);
@@ -120,24 +133,14 @@ final public class Rule_classMethodProto extends Rule
 
     rule = null;
     if (parsed)
-      rule = new Rule_classMethodProto(context.text.substring(s0, context.index), e0);
+      rule = new Rule_methodLocal(context.text.substring(s0, context.index), e0);
     else
       context.index = s0;
 
-    context.pop("classMethodProto", parsed);
+    context.pop("methodLocal", parsed);
 
-    return (Rule_classMethodProto)rule;
+    return (Rule_methodLocal)rule;
   }
-
-	public static void main(String[] args) {
-		ParserContext context = new ParserContext("(Landroid/content/Intent;II)I", true);
-		Rule_classMethodProto rule = parse(context);
-		if (rule != null) {
-			System.out.println("rule: " + rule.rules);
-			List<Param> params = (List<Param>) new SmaliClassBuilder().visit(rule);
-			System.out.println(params);
-		}
-	}
 }
 
 /* -----------------------------------------------------------------------------
