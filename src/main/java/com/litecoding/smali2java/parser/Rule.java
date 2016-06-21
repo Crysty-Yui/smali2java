@@ -15,12 +15,13 @@ import java.util.ArrayList;
 public abstract class Rule
 {
   public final String spelling;
-  public final ArrayList<Rule> rules;
+  public final ArrayList<Rule> rules = new ArrayList<Rule>();
 
   protected Rule(String spelling, ArrayList<Rule> rules)
   {
     this.spelling = spelling;
-    this.rules = rules;
+    if (rules != null)
+    this.rules.addAll(rules);
   }
 
   public String toString()
