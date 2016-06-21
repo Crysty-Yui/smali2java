@@ -13,10 +13,10 @@ package com.litecoding.smali2java.parser.smali;
 // 数据类型，基本类型和对象类型
 import java.util.ArrayList;
 
+import com.litecoding.smali2java.builder.Visitor;
 import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
 import com.litecoding.smali2java.parser.Terminal_StringValue;
-import com.litecoding.smali2java.parser.Visitor;
 
 final public class Rule_type extends Rule
 {

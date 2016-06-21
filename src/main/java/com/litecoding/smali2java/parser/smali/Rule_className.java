@@ -12,11 +12,11 @@ package com.litecoding.smali2java.parser.smali;
 
 import java.util.ArrayList;
 
+import com.litecoding.smali2java.builder.Visitor;
 import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
 import com.litecoding.smali2java.parser.Terminal_NumericValue;
 import com.litecoding.smali2java.parser.Terminal_StringValue;
-import com.litecoding.smali2java.parser.Visitor;
 import com.litecoding.smali2java.parser.text.Rule_SEMICOLON;
 
 final public class Rule_className extends Rule
