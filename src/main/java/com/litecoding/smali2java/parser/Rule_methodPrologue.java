@@ -12,6 +12,9 @@ package com.litecoding.smali2java.parser;
 
 import java.util.ArrayList;
 
+import com.litecoding.smali2java.parser.whitespacecharacters.Rule_CRLF;
+import com.litecoding.smali2java.parser.whitespacecharacters.Rule_optPadding;
+
 final public class Rule_methodPrologue extends Rule
 {
   private Rule_methodPrologue(String spelling, ArrayList<Rule> rules)
@@ -117,6 +120,16 @@ final public class Rule_methodPrologue extends Rule
 
     return (Rule_methodPrologue)rule;
   }
+
+	public static void main(String[] args) {
+		String line = "    .prologue\n";
+		ParserContext context = new ParserContext(line, true);
+		Rule rule = parse(context);
+		if (rule != null) {
+			System.out.println("rule: " + rule.rules);
+			System.out.println(line.length() == rule.toString().length());
+		}
+	}
 }
 
 /* -----------------------------------------------------------------------------
