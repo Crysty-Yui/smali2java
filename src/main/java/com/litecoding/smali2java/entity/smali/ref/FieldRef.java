@@ -2,8 +2,8 @@ package com.litecoding.smali2java.entity.smali.ref;
 
 public final class FieldRef extends SmaliCodeEntity {
 
-	private String className = "";
-	private String type = "";
+	private String className;
+	private String type;
 
 	public String getClassName() {
 		return className;
