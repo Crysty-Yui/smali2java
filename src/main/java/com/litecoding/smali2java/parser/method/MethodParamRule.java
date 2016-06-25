@@ -16,7 +16,6 @@ import com.litecoding.smali2java.builder.Visitor;
 import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
 import com.litecoding.smali2java.parser.Terminal_StringValue;
-import com.litecoding.smali2java.parser.smali.Rule_commentSequence;
 import com.litecoding.smali2java.parser.smali.Rule_optPadding;
 import com.litecoding.smali2java.parser.smali.Rule_padding;
 import com.litecoding.smali2java.parser.smali.Rule_qualifier;
@@ -27,17 +26,15 @@ import com.litecoding.smali2java.parser.text.Rule_CRLF;
 import com.litecoding.smali2java.parser.text.Rule_HASH;
 import com.litecoding.smali2java.parser.text.Rule_SP;
 
-final public class MethodParamRule extends Rule
-{
-  private MethodParamRule(String spelling, ArrayList<Rule> rules)
-  {
-    super(spelling, rules);
-  }
+public final class MethodParamRule extends Rule {
 
-  public Object accept(Visitor visitor)
-  {
-    return visitor.visit(this);
-  }
+	private MethodParamRule(String spelling, ArrayList<Rule> rules) {
+		super(spelling, rules);
+	}
+
+	public Object accept(Visitor visitor) {
+		return visitor.visit(this);
+	}
 
   public static MethodParamRule parse(ParserContext context)
   {
