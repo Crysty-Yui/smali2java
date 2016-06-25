@@ -12,14 +12,14 @@ import com.litecoding.smali2java.entity.java.Comment;
 import com.litecoding.smali2java.entity.java.MethodCall;
 import com.litecoding.smali2java.entity.java.Renderable;
 import com.litecoding.smali2java.entity.java.Variable;
-import com.litecoding.smali2java.entity.smali.FieldRef;
-import com.litecoding.smali2java.entity.smali.Instruction;
-import com.litecoding.smali2java.entity.smali.MethodRef;
-import com.litecoding.smali2java.entity.smali.Register;
-import com.litecoding.smali2java.entity.smali.RegisterGroup;
-import com.litecoding.smali2java.entity.smali.SmaliClass;
-import com.litecoding.smali2java.entity.smali.SmaliCodeEntity;
-import com.litecoding.smali2java.entity.smali.SmaliMethod;
+import com.litecoding.smali2java.entity.smali.ref.FieldRef;
+import com.litecoding.smali2java.entity.smali.ref.Instruction;
+import com.litecoding.smali2java.entity.smali.ref.MethodRef;
+import com.litecoding.smali2java.entity.smali.ref.Register;
+import com.litecoding.smali2java.entity.smali.ref.RegisterGroup;
+import com.litecoding.smali2java.entity.smali.ref.SmaliCodeEntity;
+import com.litecoding.smali2java.entity.smali.smali.SmaliClass;
+import com.litecoding.smali2java.entity.smali.smali.SmaliMethod;
 import com.litecoding.smali2java.renderer.SmaliRenderer.SmaliBlock;
 
 public class JavaRenderer {
@@ -30,10 +30,10 @@ public class JavaRenderer {
 		try {
 			block = SmaliRenderer.generateBlocks(smaliMethod);
 			
-			System.out.println("===[BEGIN OF BLOCK CHAIN]===");
-			SmaliRenderer.printBlockChain(block);
-			System.out.println("===[END OF BLOCK CHAIN]===");
-			System.out.println();
+//			System.out.println("===[BEGIN OF BLOCK CHAIN]===");
+//			SmaliRenderer.printBlockChain(block);
+//			System.out.println("===[END OF BLOCK CHAIN]===");
+//			System.out.println();
 		} catch(Exception e) {
 			System.err.println("Exception while generating block");
 			e.printStackTrace();
@@ -62,39 +62,37 @@ public class JavaRenderer {
 		}
 		
 		StringBuilder sb = new StringBuilder();
+		StringBuilder temp = new StringBuilder();
 		Map<String, String> ii = new HashMap<String, String>();
 		for (Instruction ins : block.instructions) {
 			if ("iget".equals(ins.getName())) {
 				List<SmaliCodeEntity> args = ins.getArguments();
 				ii.put(args.get(0).getName(), args.get(2).getName());
-				if (block.isEndsByReturn) {
-					sb.append("return ");
-					sb.append(ii.get("v0"));
-					sb.append(";");
-					sb.append("\n");
-				}
 			}
 			else if ("iget-object".equals(ins.getName())) {
 				List<SmaliCodeEntity> args = ins.getArguments();
 				ii.put(args.get(0).getName(), args.get(2).getName());
-				if (block.isEndsByReturn) {
-					sb.append("return ");
-					sb.append(ii.get("v0"));
-					sb.append(";");
-					sb.append("\n");
-				}
 			}
 			else if ("sget-object".equals(ins.getName())) {
 				List<SmaliCodeEntity> args = ins.getArguments();
-				ii.put(args.get(0).getName(), JavaRenderUtils.renderShortJavaClassName(((FieldRef)args.get(1)).getClassName()) + "." + args.get(1).getName());
-				System.out.println("?????????????????????????????????????????????????????????????????");
-				System.out.println(((FieldRef)args.get(1)).getClassName() + "." + args.get(1).getName());
+				FieldRef field = (FieldRef) args.get(1);
+				ii.put(args.get(0).getName(), JavaRenderUtils.renderShortJavaClassName(field.getClassName()) + "." + field.getName());
+			}
+			else if (".param".equals(ins.getName())) {
+				List<SmaliCodeEntity> args = ins.getArguments();
+				ii.put(args.get(0).getName(), args.get(1).getName());
+			}
+			else if ("const/4".equals(ins.getName())) {
+				List<SmaliCodeEntity> args = ins.getArguments();
+				ii.put(args.get(0).getName(), args.get(1).getName());
+			}
+			else if ("const/16".equals(ins.getName())) {
+				List<SmaliCodeEntity> args = ins.getArguments();
+				ii.put(args.get(0).getName(), args.get(1).getName());
 			}
 			else if ("const-string".equals(ins.getName())) {
 				List<SmaliCodeEntity> args = ins.getArguments();
 				ii.put(args.get(0).getName(), args.get(1).getName());
-				System.out.println("################################################################");
-				System.out.println(args.get(1).getName());
 			}
 			else if ("iput".equals(ins.getName())) {
 				List<SmaliCodeEntity> args = ins.getArguments();
@@ -112,55 +110,62 @@ public class JavaRenderer {
 				}
 				sb.append(args.get(2).getName());
 				sb.append(" = ");
-				sb.append(";");
-			}
-			else if ("invoke-virtual".equals(ins.getName())) {
-				List<SmaliCodeEntity> args = ins.getArguments();
-				RegisterGroup rg = (RegisterGroup)args.get(0);
-				List<SmaliCodeEntity> ens = rg.getArguments();
-//				sb.append(JavaRenderUtils.renderShortJavaClassName(((MethodRef) args.get(1)).getClassName()));
-				String v = ens.get(0).getName();
-				if (!"p0".equals(v)) {// 本类方法，省略对象
-					sb.append(ii.get(v));
-					sb.append(".");
-				}
-				sb.append(((MethodRef) args.get(1)).getName());
-				sb.append("(");
-				for (int i = 1; i < ens.size(); i++) {
-					sb.append(ii.get(ens.get(i).getName()));
-					if (i < ens.size() - 1) {
-						sb.append(", ");
-					}
-				}
-				sb.append(");");
-				sb.append("\n");
+				sb.append(ii.get(args.get(0).getName()));
+				sb.append(";\n");
 			}
 			else if ("invoke-direct".equals(ins.getName())) {
+				temp.delete(0, temp.length());
 				List<SmaliCodeEntity> args = ins.getArguments();
 				RegisterGroup rg = (RegisterGroup)args.get(0);
+				MethodRef method = (MethodRef) args.get(1);
+
 				List<SmaliCodeEntity> ens = rg.getArguments();
-//				sb.append(JavaRenderUtils.renderShortJavaClassName(((MethodRef) args.get(1)).getClassName()));
 				String v = ens.get(0).getName();
 				if (!"p0".equals(v)) {// 本类方法，省略对象
-					sb.append(ii.get(v));
-					sb.append(".");
+					temp.append(ii.get(v));
+					temp.append(".");
 				}
-				sb.append(((MethodRef) args.get(1)).getName());
-				sb.append("(");
+				temp.append(method.getName());
+				temp.append("(");
 				for (int i = 1; i < ens.size(); i++) {
-					sb.append(ii.get(ens.get(i).getName()));
+					temp.append(ii.get(ens.get(i).getName()));
 					if (i < ens.size() - 1) {
-						sb.append(", ");
+						temp.append(", ");
 					}
 				}
-				sb.append(");");
-				sb.append("\n");
+				temp.append(");");
+				temp.append("\n");
+			}
+			else if ("invoke-virtual".equals(ins.getName())) {
+				temp.delete(0, temp.length());
+				List<SmaliCodeEntity> args = ins.getArguments();
+				RegisterGroup rg = (RegisterGroup)args.get(0);
+				MethodRef method = (MethodRef) args.get(1);
+				
+				List<SmaliCodeEntity> ens = rg.getArguments();
+				String v = ens.get(0).getName();
+				if (!"p0".equals(v)) {// 本类方法，省略对象
+					temp.append(ii.get(v));
+					temp.append(".");
+				}
+				temp.append(method.getName());
+				temp.append("(");
+				for (int i = 1; i < ens.size(); i++) {
+					temp.append(ii.get(ens.get(i).getName()));
+					if (i < ens.size() - 1) {
+						temp.append(", ");
+					}
+				}
+				temp.append(");");
+				temp.append("\n");
 			}
 			else if ("invoke-static".equals(ins.getName())) {
 				List<SmaliCodeEntity> args = ins.getArguments();
-				sb.append(JavaRenderUtils.renderShortJavaClassName(((MethodRef) args.get(1)).getClassName()));
+				RegisterGroup rg = (RegisterGroup) args.get(0);
+				MethodRef method = (MethodRef) args.get(1);
+
+				sb.append(JavaRenderUtils.renderShortJavaClassName(method.getClassName()));
 				sb.append(".(");
-				RegisterGroup rg = (RegisterGroup)args.get(0);
 				List<SmaliCodeEntity> ens = rg.getArguments();
 				for (int i = 0; i < ens.size(); i++) {
 					sb.append(ii.get(ens.get(i).getName()));
@@ -173,10 +178,12 @@ public class JavaRenderer {
 			}
 			else if ("invoke-super".equals(ins.getName())) {
 				List<SmaliCodeEntity> args = ins.getArguments();
-				sb.append("super.");
-				sb.append(((MethodRef) args.get(1)).getName());
-				sb.append("(");
 				RegisterGroup rg = (RegisterGroup)args.get(0);
+				MethodRef method = (MethodRef) args.get(1);
+
+				sb.append("super.");
+				sb.append(method.getName());
+				sb.append("(");
 				List<SmaliCodeEntity> ens = rg.getArguments();
 				for (int i = 1; i < ens.size(); i++) {
 					sb.append(ii.get(ens.get(i).getName()));
@@ -186,6 +193,13 @@ public class JavaRenderer {
 				}
 				sb.append(");");
 				sb.append("\n");
+			}
+			if ("move-result-object".equals(ins.getName())) {
+				List<SmaliCodeEntity> args = ins.getArguments();
+				ii.put(args.get(0).getName(), temp.toString());
+			}
+			else {
+				sb.append(temp);
 			}
 		}
 		entities.add(new Comment(sb.toString()));
