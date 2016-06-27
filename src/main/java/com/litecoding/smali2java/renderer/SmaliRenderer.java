@@ -7,16 +7,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.litecoding.smali2java.entity.smali.ClassRef;
-import com.litecoding.smali2java.entity.smali.FieldRef;
-import com.litecoding.smali2java.entity.smali.Instruction;
-import com.litecoding.smali2java.entity.smali.Label;
 import com.litecoding.smali2java.entity.smali.OpcodeData;
-import com.litecoding.smali2java.entity.smali.Register;
-import com.litecoding.smali2java.entity.smali.Register.RegisterInfo;
-import com.litecoding.smali2java.entity.smali.RegisterGroup;
-import com.litecoding.smali2java.entity.smali.SmaliCodeEntity;
-import com.litecoding.smali2java.entity.smali.SmaliMethod;
+import com.litecoding.smali2java.entity.smali.ref.ClassRef;
+import com.litecoding.smali2java.entity.smali.ref.FieldRef;
+import com.litecoding.smali2java.entity.smali.ref.Instruction;
+import com.litecoding.smali2java.entity.smali.ref.Label;
+import com.litecoding.smali2java.entity.smali.ref.Register;
+import com.litecoding.smali2java.entity.smali.ref.RegisterGroup;
+import com.litecoding.smali2java.entity.smali.ref.SmaliCodeEntity;
+import com.litecoding.smali2java.entity.smali.ref.Register.RegisterInfo;
+import com.litecoding.smali2java.entity.smali.smali.SmaliMethod;
 
 import dalvik.bytecode.Opcodes;
 
@@ -55,12 +55,14 @@ public class SmaliRenderer {
 		
 		public final List<Instruction> instructions = new LinkedList<Instruction>();
 		
+		public Instruction condition = null;
+		
+		/* 由...结束 */
+		
 		/**
 		 * Last instruction is if-*.
 		 */
 		public boolean isEndsByCondition = false;
-		
-		public Instruction condition = null;
 		
 		/**
 		 * Last instruction is goto*.
@@ -191,6 +193,7 @@ public class SmaliRenderer {
 		
 		SmaliBlock block = rootBlock;
 		
+		// 解析命令
 		for(SmaliCodeEntity codeEntity : smaliMethod.getCommands()) {
 			//label for outer breaking
 			mainLoop:
@@ -211,6 +214,7 @@ public class SmaliRenderer {
 					block = new SmaliBlock();
 					break mainLoop;
 				}
+				// if条件语句
 				case OpcodeData.TYPE_CONDITION: {
 					block.internalIsEmpty = false;
 					block.isEndsByCondition = true;
@@ -221,6 +225,7 @@ public class SmaliRenderer {
 					//register block in labeled & all
 					if(block.smaliLabel != null)
 						labeledBlocks.put(block.smaliLabel.getName(), block);
+					block.instructions.add(instruction);// TODO 位置可能不对
 					allBlocks.add(block);
 					
 					//now we should create a block that follows the current if condition is false
@@ -230,6 +235,7 @@ public class SmaliRenderer {
 					
 					break mainLoop;
 				}
+				// return
 				case OpcodeData.TYPE_RETURN: {
 					block.internalIsEmpty = false;
 					block.isEndsByReturn = true;
@@ -250,7 +256,9 @@ public class SmaliRenderer {
 					break mainLoop;
 				}
 				}
-			} else if(codeEntity instanceof Label) {
+			}
+			// 标签(:开头的命令)
+			else if(codeEntity instanceof Label) {
 				Label label = (Label) codeEntity;
 				if(!block.internalIsEmpty) {
 					//This means that end of current block is regular instruction 
