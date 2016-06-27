@@ -94,7 +94,7 @@ public class SmaliRenderer {
 		/**
 		 * Shows is block never used before
 		 */
-		public boolean internalIsEmpty = true;
+		public boolean internalIsEmpty = true;// 代码块是否没有内容
 		public Label internalNextLabelIfTrue = null;
 		
 		public SmaliBlock() {
@@ -201,60 +201,67 @@ public class SmaliRenderer {
 			if(codeEntity instanceof Instruction) {
 				Instruction instruction = (Instruction) codeEntity;
 				switch(instruction.getOpcodeData().getType()) {
-				case OpcodeData.TYPE_GOTO: {
-					block.internalIsEmpty = false;
-					block.isEndsByGoto = true;
-					block.internalNextLabelIfTrue = (Label) instruction.getArguments().get(0);
-					
-					//register block in labeled & all
-					if(block.smaliLabel != null)
-						labeledBlocks.put(block.smaliLabel.getName(), block);
-					allBlocks.add(block);
-					
-					block = new SmaliBlock();
-					break mainLoop;
-				}
-				// if条件语句
-				case OpcodeData.TYPE_CONDITION: {
-					block.internalIsEmpty = false;
-					block.isEndsByCondition = true;
-					block.condition = instruction;
-					block.internalNextLabelIfTrue = 
-							(Label) instruction.getArguments().get(instruction.getArguments().size() - 1);
-										
-					//register block in labeled & all
-					if(block.smaliLabel != null)
-						labeledBlocks.put(block.smaliLabel.getName(), block);
-					block.instructions.add(instruction);// TODO 位置可能不对
-					allBlocks.add(block);
-					
-					//now we should create a block that follows the current if condition is false
-					SmaliBlock prevBlock = block;
-					block = new SmaliBlock();
-					prevBlock.nextBlockIfFalse = block;
-					
-					break mainLoop;
-				}
-				// return
-				case OpcodeData.TYPE_RETURN: {
-					block.internalIsEmpty = false;
-					block.isEndsByReturn = true;
-					block.returnInstruction = instruction;
-					
-					//register block in labeled & all
-					if(block.smaliLabel != null)
-						labeledBlocks.put(block.smaliLabel.getName(), block);
-					allBlocks.add(block);
-					
-					block = new SmaliBlock();
-					break mainLoop;
-				}
-				default: {
-					block.internalIsEmpty = false;
-					block.instructions.add(instruction);
-					
-					break mainLoop;
-				}
+					case OpcodeData.TYPE_GOTO:
+						/* 旧的代码块结束 */
+
+						block.internalIsEmpty = false;
+						block.isEndsByGoto = true;
+						block.internalNextLabelIfTrue = (Label) instruction.getArguments().get(0);
+						
+						//register block in labeled & all
+						if(block.smaliLabel != null)
+							labeledBlocks.put(block.smaliLabel.getName(), block);
+						allBlocks.add(block);
+
+						/* 新的代码块开始 */
+
+						block = new SmaliBlock();
+						break mainLoop;
+					// if条件语句
+					case OpcodeData.TYPE_CONDITION:
+						/* 旧的代码块结束 */
+
+						block.internalIsEmpty = false;
+						block.isEndsByCondition = true;
+						block.condition = instruction;
+						block.internalNextLabelIfTrue = (Label) instruction.getArguments().get(instruction.getArguments().size() - 1);
+											
+						//register block in labeled & all
+						if(block.smaliLabel != null)
+							labeledBlocks.put(block.smaliLabel.getName(), block);
+						block.instructions.add(instruction);// TODO 位置可能不对
+						allBlocks.add(block);
+
+						/* 新的代码块开始 */
+
+						//now we should create a block that follows the current if condition is false
+						SmaliBlock prevBlock = block;
+						block = new SmaliBlock();
+						prevBlock.nextBlockIfFalse = block;
+						
+						break mainLoop;
+					// return
+					case OpcodeData.TYPE_RETURN:
+						/* 旧的代码块结束 */
+
+						block.internalIsEmpty = false;
+						block.isEndsByReturn = true;
+						block.returnInstruction = instruction;
+						
+						//register block in labeled & all
+						if(block.smaliLabel != null)
+							labeledBlocks.put(block.smaliLabel.getName(), block);
+						allBlocks.add(block);
+
+						/* 新的代码块开始 */
+
+						block = new SmaliBlock();
+						break mainLoop;
+					default:
+						block.internalIsEmpty = false;
+						block.instructions.add(instruction);
+						
+						break mainLoop;
 				}
 			}
 			// 标签(:开头的命令)
