@@ -19,20 +19,16 @@ import com.litecoding.smali2java.parser.text.Rule_HTAB;
 import com.litecoding.smali2java.parser.text.Rule_SP;
 
 // 空格或制表符
-final public class Rule_padding extends Rule
-{
-  private Rule_padding(String spelling, ArrayList<Rule> rules)
-  {
+final public class Rule_padding extends Rule {
+  private Rule_padding(String spelling, ArrayList<Rule> rules) {
     super(spelling, rules);
   }
 
-  public Object accept(Visitor visitor)
-  {
+  public Object accept(Visitor visitor) {
     return visitor.visit(this);
   }
 
-  public static Rule_padding parse(ParserContext context)
-  {
+  public static Rule_padding parse(ParserContext context) {
     context.push("padding");
 
     boolean parsed = true;
@@ -41,38 +37,30 @@ final public class Rule_padding extends Rule
     Rule rule;
 
     parsed = false;
-    if (!parsed)
-    {
-      {
+    if (!parsed) {
         ArrayList<Rule> e1 = new ArrayList<Rule>();
         int s1 = context.index;
         parsed = true;
-        if (parsed)
-        {
+        if (parsed) {
           boolean f1 = true;
           int c1 = 0;
-          for (int i1 = 0; i1 < 1 && f1; i1++)
-          {
+          for (int i1 = 0; i1 < 1 && f1; i1++) {
             int g1 = context.index;
             parsed = false;
             
             /* 空格 */
             
-            if (!parsed)
-            {
+            if (!parsed) {
               {
                 ArrayList<Rule> e2 = new ArrayList<Rule>();
                 int s2 = context.index;
                 parsed = true;
-                if (parsed)
-                {
+                if (parsed) {
                   boolean f2 = true;
                   int c2 = 0;
-                  for (int i2 = 0; i2 < 1 && f2; i2++)
-                  {
+                  for (int i2 = 0; i2 < 1 && f2; i2++) {
                     rule = Rule_SP.parse(context);
-                    if ((f2 = rule != null))
-                    {
+                    if ((f2 = rule != null)) {
                       e2.add(rule);
                       c2++;
                     }
@@ -88,21 +76,17 @@ final public class Rule_padding extends Rule
             
             /* \t */
             
-            if (!parsed)
-            {
+            if (!parsed) {
               {
                 ArrayList<Rule> e2 = new ArrayList<Rule>();
                 int s2 = context.index;
                 parsed = true;
-                if (parsed)
-                {
+                if (parsed) {
                   boolean f2 = true;
                   int c2 = 0;
-                  for (int i2 = 0; i2 < 1 && f2; i2++)
-                  {
+                  for (int i2 = 0; i2 < 1 && f2; i2++) {
                     rule = Rule_HTAB.parse(context);
-                    if ((f2 = rule != null))
-                    {
+                    if ((f2 = rule != null)) {
                       e2.add(rule);
                       c2++;
                     }
@@ -118,25 +102,19 @@ final public class Rule_padding extends Rule
             f1 = context.index > g1;
             if (parsed) c1++;
           }
-          while (f1)
-          {
+          while (f1) {
             int g1 = context.index;
             parsed = false;
-            if (!parsed)
-            {
-              {
+            if (!parsed) {
                 ArrayList<Rule> e2 = new ArrayList<Rule>();
                 int s2 = context.index;
                 parsed = true;
-                if (parsed)
-                {
+                if (parsed) {
                   boolean f2 = true;
                   int c2 = 0;
-                  for (int i2 = 0; i2 < 1 && f2; i2++)
-                  {
+                  for (int i2 = 0; i2 < 1 && f2; i2++) {
                     rule = Rule_SP.parse(context);
-                    if ((f2 = rule != null))
-                    {
+                    if (f2 = rule != null) {
                       e2.add(rule);
                       c2++;
                     }
@@ -147,23 +125,17 @@ final public class Rule_padding extends Rule
                   e1.addAll(e2);
                 else
                   context.index = s2;
-              }
             }
-            if (!parsed)
-            {
-              {
+            if (!parsed) {
                 ArrayList<Rule> e2 = new ArrayList<Rule>();
                 int s2 = context.index;
                 parsed = true;
-                if (parsed)
-                {
+                if (parsed) {
                   boolean f2 = true;
                   int c2 = 0;
-                  for (int i2 = 0; i2 < 1 && f2; i2++)
-                  {
+                  for (int i2 = 0; i2 < 1 && f2; i2++) {
                     rule = Rule_HTAB.parse(context);
-                    if ((f2 = rule != null))
-                    {
+                    if (f2 = rule != null) {
                       e2.add(rule);
                       c2++;
                     }
@@ -174,7 +146,6 @@ final public class Rule_padding extends Rule
                   e1.addAll(e2);
                 else
                   context.index = s2;
-              }
             }
             f1 = context.index > g1;
             if (parsed) c1++;
@@ -185,7 +156,6 @@ final public class Rule_padding extends Rule
           e0.addAll(e1);
         else
           context.index = s1;
-      }
     }
 
     rule = null;
@@ -198,12 +168,6 @@ final public class Rule_padding extends Rule
 
     return (Rule_padding)rule;
   }
-
-	public static void main(String[] args) {
-		ParserContext context = new ParserContext("    \t\t \t", true);
-		Rule rule = parse(context);
-		System.out.println("rule: " + rule.rules.size());
-	}
 }
 
 /* -----------------------------------------------------------------------------
