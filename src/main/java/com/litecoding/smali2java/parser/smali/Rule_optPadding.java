@@ -16,17 +16,16 @@ import com.litecoding.smali2java.builder.Visitor;
 import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
 
-final public class Rule_optPadding extends Rule
-{
-  private Rule_optPadding(String spelling, ArrayList<Rule> rules)
-  {
-    super(spelling, rules);
-  }
+// 若干空格或者制表符
+final public class Rule_optPadding extends Rule {
 
-  public Object accept(Visitor visitor)
-  {
-    return visitor.visit(this);
-  }
+	private Rule_optPadding(String spelling, ArrayList<Rule> rules) {
+		super(spelling, rules);
+	}
+
+	public Object accept(Visitor visitor) {
+		return visitor.visit(this);
+	}
 
   public static Rule_optPadding parse(ParserContext context)
   {
@@ -40,7 +39,6 @@ final public class Rule_optPadding extends Rule
     parsed = false;
     if (!parsed)
     {
-      {
         ArrayList<Rule> e1 = new ArrayList<Rule>();
         int s1 = context.index;
         parsed = true;
@@ -55,7 +53,6 @@ final public class Rule_optPadding extends Rule
             parsed = false;
             if (!parsed)
             {
-              {
                 ArrayList<Rule> e2 = new ArrayList<Rule>();
                 int s2 = context.index;
                 parsed = true;
@@ -78,7 +75,6 @@ final public class Rule_optPadding extends Rule
                   e1.addAll(e2);
                 else
                   context.index = s2;
-              }
             }
             f1 = context.index > g1;
             if (parsed) c1++;
@@ -89,7 +85,6 @@ final public class Rule_optPadding extends Rule
           e0.addAll(e1);
         else
           context.index = s1;
-      }
     }
 
     rule = null;
