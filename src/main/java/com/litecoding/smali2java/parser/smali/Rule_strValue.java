@@ -17,6 +17,7 @@ import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
 import com.litecoding.smali2java.parser.text.Rule_QUOT;
 
+// e.g. "id"
 final public class Rule_strValue extends Rule
 {
   private Rule_strValue(String spelling, ArrayList<Rule> rules)
