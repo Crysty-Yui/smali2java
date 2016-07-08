@@ -10,20 +10,23 @@
 
 package com.litecoding.smali2java.parser;
 
+import java.util.List;
 import java.util.Stack;
 
 public class ParserContext
 {
-  public final String text;
+  public final String text;// smali 源文件
   public int index;
+	public int line = 0;// 行数
+	public List<String> lines;
 
   private Stack<Integer> startStack = new Stack<Integer>();
   private Stack<String> callStack = new Stack<String>();
   private Stack<String> errorStack = new Stack<String>();
-  private int level = 0;
+  private int level = 0;// push加1级pop减1级
   private int errorIndex = 0;
 
-  private final boolean traceOn;
+  private final boolean traceOn;// 输出跟踪日志
 
   public ParserContext(String text, boolean traceOn)
   {
