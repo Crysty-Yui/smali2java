@@ -42,7 +42,7 @@ final public class Rule_optPadding extends Rule {
 			parsed = true;
 			if (parsed) {
 				boolean f1 = true;
-				int c1 = 0;
+//				int c1 = 0;
 				for (int i1 = 0; i1 < 1 && f1; i1++) {
 					int g1 = context.index;
 					parsed = false;
@@ -68,8 +68,8 @@ final public class Rule_optPadding extends Rule {
 							context.index = s2;
 					}
 					f1 = context.index > g1;
-					if (parsed)
-						c1++;
+//					if (parsed)
+//						c1++;
 				}
 				parsed = true;
 			}
