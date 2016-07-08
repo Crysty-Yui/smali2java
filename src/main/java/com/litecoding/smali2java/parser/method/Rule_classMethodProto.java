@@ -11,11 +11,8 @@
 package com.litecoding.smali2java.parser.method;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import com.litecoding.smali2java.builder.SmaliClassBuilder;
 import com.litecoding.smali2java.builder.Visitor;
-import com.litecoding.smali2java.entity.smali.Param;
 import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
 import com.litecoding.smali2java.parser.Terminal_NumericValue;
@@ -128,16 +125,6 @@ final public class Rule_classMethodProto extends Rule
 
     return (Rule_classMethodProto)rule;
   }
-
-	public static void main(String[] args) {
-		ParserContext context = new ParserContext("(Landroid/content/Intent;II)I", true);
-		Rule_classMethodProto rule = parse(context);
-		if (rule != null) {
-			System.out.println("rule: " + rule.rules);
-			List<Param> params = (List<Param>) new SmaliClassBuilder().visit(rule);
-			System.out.println(params);
-		}
-	}
 }
 
 /* -----------------------------------------------------------------------------

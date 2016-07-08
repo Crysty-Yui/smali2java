@@ -16,7 +16,6 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
-import com.litecoding.smali2java.builder.SmaliClassBuilder;
 import com.litecoding.smali2java.builder.Visitor;
 import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
@@ -24,10 +23,8 @@ import com.litecoding.smali2java.parser.smali.Rule_accessMode;
 import com.litecoding.smali2java.parser.smali.Rule_classConstructorName;
 import com.litecoding.smali2java.parser.smali.Rule_dirEndMethod;
 import com.litecoding.smali2java.parser.smali.Rule_dirMethod;
-import com.litecoding.smali2java.parser.smali.Rule_optPadding;
 import com.litecoding.smali2java.parser.smali.Rule_padding;
 import com.litecoding.smali2java.parser.smali.Rule_qualifier;
-import com.litecoding.smali2java.parser.text.Rule_CRLF;
 
 final public class Rule_classMethod extends Rule
 {
@@ -49,7 +46,7 @@ final public class Rule_classMethod extends Rule
     context.push("classMethod");
 
     boolean parsed = true;
-    int s0 = context.index;
+//    int s0 = context.index;
     Rule rule;
 
     parsed = false;
