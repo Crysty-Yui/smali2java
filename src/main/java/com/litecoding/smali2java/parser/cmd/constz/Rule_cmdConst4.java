@@ -16,6 +16,7 @@ import com.litecoding.smali2java.builder.Visitor;
 import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
 import com.litecoding.smali2java.parser.Terminal_StringValue;
+import com.litecoding.smali2java.parser.cmd.LineRule;
 import com.litecoding.smali2java.parser.smali.Rule_codeRegisterVDst;
 import com.litecoding.smali2java.parser.smali.Rule_commentSequence;
 import com.litecoding.smali2java.parser.smali.Rule_intValue;
@@ -24,7 +25,7 @@ import com.litecoding.smali2java.parser.smali.Rule_optPadding;
 import com.litecoding.smali2java.parser.smali.Rule_padding;
 import com.litecoding.smali2java.parser.text.Rule_CRLF;
 
-final public class Rule_cmdConst4 extends Rule
+final public class Rule_cmdConst4 extends LineRule
 {
   private Rule_cmdConst4(String spelling, ArrayList<Rule> rules)
   {
