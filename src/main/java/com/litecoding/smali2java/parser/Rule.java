@@ -12,6 +12,8 @@ package com.litecoding.smali2java.parser;
 
 import java.util.ArrayList;
 
+import com.litecoding.smali2java.builder.Visitor;
+
 public abstract class Rule {
 
 	public final String spelling;
