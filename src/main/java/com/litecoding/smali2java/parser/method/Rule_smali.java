@@ -18,7 +18,7 @@ import org.apache.commons.io.FileUtils;
 
 import com.litecoding.smali2java.builder.SmaliClassBuilder;
 import com.litecoding.smali2java.builder.Visitor;
-import com.litecoding.smali2java.entity.smali.SmaliClass;
+import com.litecoding.smali2java.entity.smali.smali.SmaliClass;
 import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
 import com.litecoding.smali2java.parser.smali.Rule_skipLine;
@@ -48,7 +48,6 @@ final public class Rule_smali extends Rule
     parsed = false;
     if (!parsed)
     {
-      {
         ArrayList<Rule> e1 = new ArrayList<Rule>();
         int s1 = context.index;
         parsed = true;
@@ -103,7 +102,6 @@ final public class Rule_smali extends Rule
             parsed = false;
             if (!parsed)
             {
-              {
                 ArrayList<Rule> e2 = new ArrayList<Rule>();
                 int s2 = context.index;
                 parsed = true;
@@ -126,11 +124,9 @@ final public class Rule_smali extends Rule
                   e1.addAll(e2);
                 else
                   context.index = s2;
-              }
             }
             if (!parsed)
             {
-              {
                 ArrayList<Rule> e2 = new ArrayList<Rule>();
                 int s2 = context.index;
                 parsed = true;
@@ -153,7 +149,6 @@ final public class Rule_smali extends Rule
                   e1.addAll(e2);
                 else
                   context.index = s2;
-              }
             }
             f1 = context.index > g1;
             if (parsed) c1++;
@@ -176,7 +171,6 @@ final public class Rule_smali extends Rule
             parsed = false;
             if (!parsed)
             {
-              {
                 ArrayList<Rule> e2 = new ArrayList<Rule>();
                 int s2 = context.index;
                 parsed = true;
@@ -187,7 +181,7 @@ final public class Rule_smali extends Rule
                   for (int i2 = 0; i2 < 1 && f2; i2++)
                   {
                     rule = Rule_classMethod.parse(context);
-                    if ((f2 = rule != null))
+                    if (f2 = rule != null)
                     {
                       e2.add(rule);
                       c2++;
@@ -199,11 +193,9 @@ final public class Rule_smali extends Rule
                   e1.addAll(e2);
                 else
                   context.index = s2;
-              }
             }
             if (!parsed)
             {
-              {
                 ArrayList<Rule> e2 = new ArrayList<Rule>();
                 int s2 = context.index;
                 parsed = true;
@@ -226,7 +218,6 @@ final public class Rule_smali extends Rule
                   e1.addAll(e2);
                 else
                   context.index = s2;
-              }
             }
             f1 = context.index > g1;
             if (parsed) c1++;
@@ -241,7 +232,6 @@ final public class Rule_smali extends Rule
           e0.addAll(e1);
         else
           context.index = s1;
-      }
     }
 
     rule = null;
@@ -261,19 +251,20 @@ final public class Rule_smali extends Rule
 //		if (rule != null) {
 //			System.out.println("rule: " + rule.rules);
 //		}
-		List<String> lines = FileUtils.readLines(new File("Brand.smali"));
+		List<String> lines = FileUtils.readLines(new File("test/smali/com/itheima/redbaby/BaseActivity.smali"));
 		for (String line : lines) {
 			ParserContext context = new ParserContext(line + "\n", false);
 			parse(context);
 		}
 		if (rule != null) {
-			System.out.println("rule: " + rule.rules);
+//			System.out.println("rule: " + rule.rules);
 			Rule r = rule;
 //			new SmaliClassBuilder().visit(rule_classMethod);
 			
 			SmaliClass smaliClass = (SmaliClass)rule.accept(new SmaliClassBuilder());
 			
-			System.out.println(ClassRenderer.renderObject(smaliClass));
+			String ret = ClassRenderer.renderObject(smaliClass);
+//			System.out.println(ret);
 		}
 	}
 }
