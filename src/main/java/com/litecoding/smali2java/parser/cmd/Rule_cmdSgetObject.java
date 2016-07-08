@@ -24,7 +24,7 @@ import com.litecoding.smali2java.parser.smali.Rule_padding;
 import com.litecoding.smali2java.parser.smali.Rule_smaliFieldRef;
 import com.litecoding.smali2java.parser.text.Rule_CRLF;
 
-final public class Rule_cmdSgetObject extends Rule
+final public class Rule_cmdSgetObject extends LineRule
 {
   private Rule_cmdSgetObject(String spelling, ArrayList<Rule> rules)
   {
