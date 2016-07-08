@@ -16,6 +16,9 @@ import com.litecoding.smali2java.builder.Visitor;
 import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
 import com.litecoding.smali2java.parser.cmd.Rule_cmdAny;
+import com.litecoding.smali2java.parser.cmd.Rule_methodLine;
+import com.litecoding.smali2java.parser.cmd.Rule_methodLocals;
+import com.litecoding.smali2java.parser.cmd.Rule_methodPrologue;
 import com.litecoding.smali2java.parser.smali.Rule_annotation;
 import com.litecoding.smali2java.parser.smali.Rule_label;
 import com.litecoding.smali2java.parser.smali.Rule_skipLine;
@@ -198,6 +201,39 @@ final public class Rule_methodBody extends Rule
                   context.index = s2;
               }
             }
+            
+            /* */
+            
+            if (!parsed)
+            {
+            	{
+            		ArrayList<Rule> e2 = new ArrayList<Rule>();
+            		int s2 = context.index;
+            		parsed = true;
+            		if (parsed)
+            		{
+            			boolean f2 = true;
+            			int c2 = 0;
+            			for (int i2 = 0; i2 < 1 && f2; i2++)
+            			{
+            				rule = MethodParamRule.parse(context);
+            				if ((f2 = rule != null))
+            				{
+            					e2.add(rule);
+            					c2++;
+            				}
+            			}
+            			parsed = c2 == 1;
+            		}
+            		if (parsed)
+            			e1.addAll(e2);
+            		else
+            			context.index = s2;
+            	}
+            }
+            
+            /* */
+            
             if (!parsed)
             {
               {
