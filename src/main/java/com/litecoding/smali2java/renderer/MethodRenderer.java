@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.litecoding.smali2java.entity.java.Renderable;
 import com.litecoding.smali2java.entity.smali.Param;
-import com.litecoding.smali2java.entity.smali.SmaliEntity;
-import com.litecoding.smali2java.entity.smali.SmaliMethod;
+import com.litecoding.smali2java.entity.smali.smali.SmaliEntity;
+import com.litecoding.smali2java.entity.smali.smali.SmaliMethod;
 
 public class MethodRenderer {
 	private boolean isEgyptianBraces = false;

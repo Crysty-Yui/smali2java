@@ -2,10 +2,10 @@ package com.litecoding.smali2java.renderer;
 
 import java.util.List;
 
-import com.litecoding.smali2java.entity.smali.SmaliClass;
-import com.litecoding.smali2java.entity.smali.SmaliEntity;
-import com.litecoding.smali2java.entity.smali.SmaliField;
-import com.litecoding.smali2java.entity.smali.SmaliMethod;
+import com.litecoding.smali2java.entity.smali.smali.SmaliClass;
+import com.litecoding.smali2java.entity.smali.smali.SmaliEntity;
+import com.litecoding.smali2java.entity.smali.smali.SmaliField;
+import com.litecoding.smali2java.entity.smali.smali.SmaliMethod;
 
 /**
  * 
@@ -22,7 +22,7 @@ public class ClassRenderer
 		return (new ClassRenderer()).render(smaliClass);
 	}
 	
-	public String render(SmaliClass smaliClass)
+	private String render(SmaliClass smaliClass)
 	{
 		StringBuilder builder = new StringBuilder();
 		builder.append(renderPackage(smaliClass.getClassName()));
