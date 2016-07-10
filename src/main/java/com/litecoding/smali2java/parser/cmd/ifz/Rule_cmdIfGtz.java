@@ -52,7 +52,7 @@ final public class Rule_cmdIfGtz extends Rule {
 				int c1 = 0;
 				for (int i1 = 0; i1 < 1 && f1; i1++) {
 					rule = Rule_optPadding.parse(context);
-					if ((f1 = rule != null)) {
+					if (f1 = rule != null) {
 						e1.add(rule);
 						c1++;
 					}
@@ -64,7 +64,7 @@ final public class Rule_cmdIfGtz extends Rule {
 				int c1 = 0;
 				for (int i1 = 0; i1 < 1 && f1; i1++) {
 					rule = Terminal_StringValue.parse(context, "if-gtz");
-					if ((f1 = rule != null)) {
+					if (f1 = rule != null) {
 						e1.add(rule);
 						c1++;
 					}
@@ -76,7 +76,7 @@ final public class Rule_cmdIfGtz extends Rule {
 				int c1 = 0;
 				for (int i1 = 0; i1 < 1 && f1; i1++) {
 					rule = Rule_padding.parse(context);
-					if ((f1 = rule != null)) {
+					if (f1 = rule != null) {
 						e1.add(rule);
 						c1++;
 					}
@@ -88,7 +88,7 @@ final public class Rule_cmdIfGtz extends Rule {
 				int c1 = 0;
 				for (int i1 = 0; i1 < 1 && f1; i1++) {
 					rule = Rule_codeRegister.parse(context);
-					if ((f1 = rule != null)) {
+					if (f1 = rule != null) {
 						e1.add(rule);
 						c1++;
 					}
@@ -100,7 +100,7 @@ final public class Rule_cmdIfGtz extends Rule {
 				int c1 = 0;
 				for (int i1 = 0; i1 < 1 && f1; i1++) {
 					rule = Rule_listSeparator.parse(context);
-					if ((f1 = rule != null)) {
+					if (f1 = rule != null) {
 						e1.add(rule);
 						c1++;
 					}
@@ -112,7 +112,7 @@ final public class Rule_cmdIfGtz extends Rule {
 				int c1 = 0;
 				for (int i1 = 0; i1 < 1 && f1; i1++) {
 					rule = Rule_codeLabel.parse(context);
-					if ((f1 = rule != null)) {
+					if (f1 = rule != null) {
 						e1.add(rule);
 						c1++;
 					}
@@ -124,7 +124,7 @@ final public class Rule_cmdIfGtz extends Rule {
 				int c1 = 0;
 				for (int i1 = 0; i1 < 1 && f1; i1++) {
 					rule = Rule_optPadding.parse(context);
-					if ((f1 = rule != null)) {
+					if (f1 = rule != null) {
 						e1.add(rule);
 						c1++;
 					}
@@ -147,7 +147,7 @@ final public class Rule_cmdIfGtz extends Rule {
 							int c2 = 0;
 							for (int i2 = 0; i2 < 1 && f2; i2++) {
 								rule = Rule_padding.parse(context);
-								if ((f2 = rule != null)) {
+								if (f2 = rule != null) {
 									e2.add(rule);
 									c2++;
 								}
@@ -159,7 +159,7 @@ final public class Rule_cmdIfGtz extends Rule {
 							int c2 = 0;
 							for (int i2 = 0; i2 < 1 && f2; i2++) {
 								rule = Rule_commentSequence.parse(context);
-								if ((f2 = rule != null)) {
+								if (f2 = rule != null) {
 									e2.add(rule);
 									c2++;
 								}
@@ -182,7 +182,7 @@ final public class Rule_cmdIfGtz extends Rule {
 				int c1 = 0;
 				for (int i1 = 0; i1 < 1 && f1; i1++) {
 					rule = Rule_CRLF.parse(context);
-					if ((f1 = rule != null)) {
+					if (f1 = rule != null) {
 						e1.add(rule);
 						c1++;
 					}

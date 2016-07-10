@@ -171,7 +171,7 @@ final public class Rule_cmdIfEq extends Rule {
 							int c2 = 0;
 							for (int i2 = 0; i2 < 1 && f2; i2++) {
 								rule = Rule_padding.parse(context);
-								if ((f2 = rule != null)) {
+								if (f2 = rule != null) {
 									e2.add(rule);
 									c2++;
 								}
@@ -183,7 +183,7 @@ final public class Rule_cmdIfEq extends Rule {
 							int c2 = 0;
 							for (int i2 = 0; i2 < 1 && f2; i2++) {
 								rule = Rule_commentSequence.parse(context);
-								if ((f2 = rule != null)) {
+								if (f2 = rule != null) {
 									e2.add(rule);
 									c2++;
 								}
