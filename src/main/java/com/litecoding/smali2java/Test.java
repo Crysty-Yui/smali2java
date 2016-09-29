@@ -1,6 +1,5 @@
 package com.litecoding.smali2java;
 
-
 public class Test {
 
 	/**
@@ -8,10 +7,9 @@ public class Test {
 	 */
 	public static void main(String[] args) {
 		try {
-			Ecosystem.getInstance().processFile("../smali-example/smali-project/HelloWorld/HelloWorld.smali", null);
+			Ecosystem.getInstance().processFile("ServiceShake.smali", null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
 }
