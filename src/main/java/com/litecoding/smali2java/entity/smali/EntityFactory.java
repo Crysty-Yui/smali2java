@@ -2,6 +2,12 @@ package com.litecoding.smali2java.entity.smali;
 
 import java.util.List;
 
+import com.litecoding.smali2java.entity.smali.ref.FieldRef;
+import com.litecoding.smali2java.entity.smali.ref.Instruction;
+import com.litecoding.smali2java.entity.smali.ref.Label;
+import com.litecoding.smali2java.entity.smali.ref.MethodRef;
+import com.litecoding.smali2java.entity.smali.ref.SmaliCodeEntity;
+
 public class EntityFactory
 {
 	public static Label createLabel(String name)

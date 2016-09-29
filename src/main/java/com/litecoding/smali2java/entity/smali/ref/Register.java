@@ -1,7 +1,7 @@
 package com.litecoding.smali2java.entity.smali.ref;
 
-import com.litecoding.smali2java.entity.smali.SmaliEntity;
-import com.litecoding.smali2java.entity.smali.SmaliMethod;
+import com.litecoding.smali2java.entity.smali.smali.SmaliEntity;
+import com.litecoding.smali2java.entity.smali.smali.SmaliMethod;
 
 public class Register extends SmaliCodeEntity {
 	protected boolean isParameter = false;

@@ -1,6 +1,6 @@
 package com.litecoding.smali2java.entity.smali;
 
-import com.litecoding.smali2java.entity.smali.Register.RegisterInfo;
+import com.litecoding.smali2java.entity.smali.ref.Register.RegisterInfo;
 
 /**
  * SmaliMethod parameter class
