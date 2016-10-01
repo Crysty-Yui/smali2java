@@ -210,6 +210,7 @@ final public class Rule_smali extends Rule
                     {
                       e2.add(rule);
                       c2++;
+//                      System.out.println("----------------------------------------------");
                     }
                   }
                   parsed = c2 == 1;
@@ -251,7 +252,7 @@ final public class Rule_smali extends Rule
 //		if (rule != null) {
 //			System.out.println("rule: " + rule.rules);
 //		}
-		List<String> lines = FileUtils.readLines(new File("test/smali/com/itheima/redbaby/BaseActivity.smali"));
+		List<String> lines = FileUtils.readLines(new File("test/Yuki/view/CircleImageView.smali"));
 		for (String line : lines) {
 			ParserContext context = new ParserContext(line + "\n", false);
 			parse(context);
@@ -264,7 +265,7 @@ final public class Rule_smali extends Rule
 			SmaliClass smaliClass = (SmaliClass)rule.accept(new SmaliClassBuilder());
 			
 			String ret = ClassRenderer.renderObject(smaliClass);
-//			System.out.println(ret);
+			System.out.println(ret);
 		}
 	}
 }
