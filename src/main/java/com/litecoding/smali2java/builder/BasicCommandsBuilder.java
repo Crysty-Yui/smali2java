@@ -3,22 +3,73 @@ package com.litecoding.smali2java.builder;
 import java.util.ArrayList;
 
 import com.litecoding.smali2java.entity.smali.EntityFactory;
-import com.litecoding.smali2java.entity.smali.Instruction;
-import com.litecoding.smali2java.entity.smali.Label;
-import com.litecoding.smali2java.entity.smali.SmaliCodeEntity;
-import com.litecoding.smali2java.entity.smali.Value;
+import com.litecoding.smali2java.entity.smali.ref.Instruction;
+import com.litecoding.smali2java.entity.smali.ref.Label;
+import com.litecoding.smali2java.entity.smali.ref.SmaliCodeEntity;
+import com.litecoding.smali2java.entity.smali.ref.Value;
 import com.litecoding.smali2java.parser.*;
 import com.litecoding.smali2java.parser.cmd.*;
-import com.litecoding.smali2java.parser.cmd.add.Rule_cmdAddDouble;
-import com.litecoding.smali2java.parser.cmd.add.Rule_cmdAddDouble2addr;
-import com.litecoding.smali2java.parser.cmd.add.Rule_cmdAddFloat;
-import com.litecoding.smali2java.parser.cmd.add.Rule_cmdAddFloat2addr;
-import com.litecoding.smali2java.parser.cmd.add.Rule_cmdAddInt;
-import com.litecoding.smali2java.parser.cmd.add.Rule_cmdAddInt2addr;
-import com.litecoding.smali2java.parser.cmd.add.Rule_cmdAddIntLit16;
-import com.litecoding.smali2java.parser.cmd.add.Rule_cmdAddIntLit8;
-import com.litecoding.smali2java.parser.cmd.add.Rule_cmdAddLong;
-import com.litecoding.smali2java.parser.cmd.add.Rule_cmdAddLong2addr;
+import com.litecoding.smali2java.parser.cmd.and7or7xor.and.Rule_cmdAndInt;
+import com.litecoding.smali2java.parser.cmd.and7or7xor.and.Rule_cmdAndInt2addr;
+import com.litecoding.smali2java.parser.cmd.and7or7xor.and.Rule_cmdAndIntLit16;
+import com.litecoding.smali2java.parser.cmd.and7or7xor.and.Rule_cmdAndIntLit8;
+import com.litecoding.smali2java.parser.cmd.and7or7xor.and.Rule_cmdAndLong;
+import com.litecoding.smali2java.parser.cmd.and7or7xor.and.Rule_cmdAndLong2addr;
+import com.litecoding.smali2java.parser.cmd.and7or7xor.or.Rule_cmdOrInt;
+import com.litecoding.smali2java.parser.cmd.and7or7xor.or.Rule_cmdOrInt2addr;
+import com.litecoding.smali2java.parser.cmd.and7or7xor.or.Rule_cmdOrIntLit16;
+import com.litecoding.smali2java.parser.cmd.and7or7xor.or.Rule_cmdOrIntLit8;
+import com.litecoding.smali2java.parser.cmd.and7or7xor.or.Rule_cmdOrLong;
+import com.litecoding.smali2java.parser.cmd.and7or7xor.or.Rule_cmdOrLong2addr;
+import com.litecoding.smali2java.parser.cmd.and7or7xor.xor.Rule_cmdXorInt;
+import com.litecoding.smali2java.parser.cmd.and7or7xor.xor.Rule_cmdXorInt2addr;
+import com.litecoding.smali2java.parser.cmd.and7or7xor.xor.Rule_cmdXorIntLit16;
+import com.litecoding.smali2java.parser.cmd.and7or7xor.xor.Rule_cmdXorIntLit8;
+import com.litecoding.smali2java.parser.cmd.and7or7xor.xor.Rule_cmdXorLong;
+import com.litecoding.smali2java.parser.cmd.and7or7xor.xor.Rule_cmdXorLong2addr;
+import com.litecoding.smali2java.parser.cmd.asmd.add.Rule_cmdAddDouble;
+import com.litecoding.smali2java.parser.cmd.asmd.add.Rule_cmdAddDouble2addr;
+import com.litecoding.smali2java.parser.cmd.asmd.add.Rule_cmdAddFloat;
+import com.litecoding.smali2java.parser.cmd.asmd.add.Rule_cmdAddFloat2addr;
+import com.litecoding.smali2java.parser.cmd.asmd.add.Rule_cmdAddInt;
+import com.litecoding.smali2java.parser.cmd.asmd.add.Rule_cmdAddInt2addr;
+import com.litecoding.smali2java.parser.cmd.asmd.add.Rule_cmdAddIntLit16;
+import com.litecoding.smali2java.parser.cmd.asmd.add.Rule_cmdAddIntLit8;
+import com.litecoding.smali2java.parser.cmd.asmd.add.Rule_cmdAddLong;
+import com.litecoding.smali2java.parser.cmd.asmd.add.Rule_cmdAddLong2addr;
+import com.litecoding.smali2java.parser.cmd.asmd.div.Rule_cmdDivDouble;
+import com.litecoding.smali2java.parser.cmd.asmd.div.Rule_cmdDivDouble2addr;
+import com.litecoding.smali2java.parser.cmd.asmd.div.Rule_cmdDivFloat;
+import com.litecoding.smali2java.parser.cmd.asmd.div.Rule_cmdDivFloat2addr;
+import com.litecoding.smali2java.parser.cmd.asmd.div.Rule_cmdDivInt;
+import com.litecoding.smali2java.parser.cmd.asmd.div.Rule_cmdDivInt2addr;
+import com.litecoding.smali2java.parser.cmd.asmd.div.Rule_cmdDivIntLit16;
+import com.litecoding.smali2java.parser.cmd.asmd.div.Rule_cmdDivIntLit8;
+import com.litecoding.smali2java.parser.cmd.asmd.div.Rule_cmdDivLong;
+import com.litecoding.smali2java.parser.cmd.asmd.div.Rule_cmdDivLong2addr;
+import com.litecoding.smali2java.parser.cmd.asmd.mul.Rule_cmdMulDouble;
+import com.litecoding.smali2java.parser.cmd.asmd.mul.Rule_cmdMulDouble2addr;
+import com.litecoding.smali2java.parser.cmd.asmd.mul.Rule_cmdMulFloat;
+import com.litecoding.smali2java.parser.cmd.asmd.mul.Rule_cmdMulFloat2addr;
+import com.litecoding.smali2java.parser.cmd.asmd.mul.Rule_cmdMulInt;
+import com.litecoding.smali2java.parser.cmd.asmd.mul.Rule_cmdMulInt2addr;
+import com.litecoding.smali2java.parser.cmd.asmd.mul.Rule_cmdMulIntLit16;
+import com.litecoding.smali2java.parser.cmd.asmd.mul.Rule_cmdMulIntLit8;
+import com.litecoding.smali2java.parser.cmd.asmd.mul.Rule_cmdMulLong;
+import com.litecoding.smali2java.parser.cmd.asmd.mul.Rule_cmdMulLong2addr;
+import com.litecoding.smali2java.parser.cmd.asmd.sub.Rule_cmdSubDouble;
+import com.litecoding.smali2java.parser.cmd.asmd.sub.Rule_cmdSubDouble2addr;
+import com.litecoding.smali2java.parser.cmd.asmd.sub.Rule_cmdSubFloat;
+import com.litecoding.smali2java.parser.cmd.asmd.sub.Rule_cmdSubFloat2addr;
+import com.litecoding.smali2java.parser.cmd.asmd.sub.Rule_cmdSubInt;
+import com.litecoding.smali2java.parser.cmd.asmd.sub.Rule_cmdSubInt2addr;
+import com.litecoding.smali2java.parser.cmd.asmd.sub.Rule_cmdSubLong;
+import com.litecoding.smali2java.parser.cmd.asmd.sub.Rule_cmdSubLong2addr;
+import com.litecoding.smali2java.parser.cmd.cmp.Rule_cmdCmpLong;
+import com.litecoding.smali2java.parser.cmd.cmp.Rule_cmdCmpgDouble;
+import com.litecoding.smali2java.parser.cmd.cmp.Rule_cmdCmpgFloat;
+import com.litecoding.smali2java.parser.cmd.cmp.Rule_cmdCmplDouble;
+import com.litecoding.smali2java.parser.cmd.cmp.Rule_cmdCmplFloat;
 import com.litecoding.smali2java.parser.cmd.constz.Rule_cmdConst;
 import com.litecoding.smali2java.parser.cmd.constz.Rule_cmdConst16;
 import com.litecoding.smali2java.parser.cmd.constz.Rule_cmdConst4;
@@ -30,16 +81,48 @@ import com.litecoding.smali2java.parser.cmd.constz.Rule_cmdConstWide;
 import com.litecoding.smali2java.parser.cmd.constz.Rule_cmdConstWide16;
 import com.litecoding.smali2java.parser.cmd.constz.Rule_cmdConstWide32;
 import com.litecoding.smali2java.parser.cmd.constz.Rule_cmdConstWideHigh16;
-import com.litecoding.smali2java.parser.cmd.div.Rule_cmdDivDouble;
-import com.litecoding.smali2java.parser.cmd.div.Rule_cmdDivDouble2addr;
-import com.litecoding.smali2java.parser.cmd.div.Rule_cmdDivFloat;
-import com.litecoding.smali2java.parser.cmd.div.Rule_cmdDivFloat2addr;
-import com.litecoding.smali2java.parser.cmd.div.Rule_cmdDivInt;
-import com.litecoding.smali2java.parser.cmd.div.Rule_cmdDivInt2addr;
-import com.litecoding.smali2java.parser.cmd.div.Rule_cmdDivIntLit16;
-import com.litecoding.smali2java.parser.cmd.div.Rule_cmdDivIntLit8;
-import com.litecoding.smali2java.parser.cmd.div.Rule_cmdDivLong;
-import com.litecoding.smali2java.parser.cmd.div.Rule_cmdDivLong2addr;
+import com.litecoding.smali2java.parser.cmd.get7put.aget.Rule_cmdAget;
+import com.litecoding.smali2java.parser.cmd.get7put.aget.Rule_cmdAgetBoolean;
+import com.litecoding.smali2java.parser.cmd.get7put.aget.Rule_cmdAgetByte;
+import com.litecoding.smali2java.parser.cmd.get7put.aget.Rule_cmdAgetChar;
+import com.litecoding.smali2java.parser.cmd.get7put.aget.Rule_cmdAgetObject;
+import com.litecoding.smali2java.parser.cmd.get7put.aget.Rule_cmdAgetShort;
+import com.litecoding.smali2java.parser.cmd.get7put.aget.Rule_cmdAgetWide;
+import com.litecoding.smali2java.parser.cmd.get7put.aput.Rule_cmdAput;
+import com.litecoding.smali2java.parser.cmd.get7put.aput.Rule_cmdAputBoolean;
+import com.litecoding.smali2java.parser.cmd.get7put.aput.Rule_cmdAputByte;
+import com.litecoding.smali2java.parser.cmd.get7put.aput.Rule_cmdAputChar;
+import com.litecoding.smali2java.parser.cmd.get7put.aput.Rule_cmdAputObject;
+import com.litecoding.smali2java.parser.cmd.get7put.aput.Rule_cmdAputShort;
+import com.litecoding.smali2java.parser.cmd.get7put.aput.Rule_cmdAputWide;
+import com.litecoding.smali2java.parser.cmd.get7put.iget.Rule_cmdIget;
+import com.litecoding.smali2java.parser.cmd.get7put.iget.Rule_cmdIgetBoolean;
+import com.litecoding.smali2java.parser.cmd.get7put.iget.Rule_cmdIgetByte;
+import com.litecoding.smali2java.parser.cmd.get7put.iget.Rule_cmdIgetChar;
+import com.litecoding.smali2java.parser.cmd.get7put.iget.Rule_cmdIgetObject;
+import com.litecoding.smali2java.parser.cmd.get7put.iget.Rule_cmdIgetShort;
+import com.litecoding.smali2java.parser.cmd.get7put.iget.Rule_cmdIgetWide;
+import com.litecoding.smali2java.parser.cmd.get7put.iput.Rule_cmdIput;
+import com.litecoding.smali2java.parser.cmd.get7put.iput.Rule_cmdIputBoolean;
+import com.litecoding.smali2java.parser.cmd.get7put.iput.Rule_cmdIputByte;
+import com.litecoding.smali2java.parser.cmd.get7put.iput.Rule_cmdIputChar;
+import com.litecoding.smali2java.parser.cmd.get7put.iput.Rule_cmdIputObject;
+import com.litecoding.smali2java.parser.cmd.get7put.iput.Rule_cmdIputShort;
+import com.litecoding.smali2java.parser.cmd.get7put.iput.Rule_cmdIputWide;
+import com.litecoding.smali2java.parser.cmd.get7put.sget.Rule_cmdSget;
+import com.litecoding.smali2java.parser.cmd.get7put.sget.Rule_cmdSgetBoolean;
+import com.litecoding.smali2java.parser.cmd.get7put.sget.Rule_cmdSgetByte;
+import com.litecoding.smali2java.parser.cmd.get7put.sget.Rule_cmdSgetChar;
+import com.litecoding.smali2java.parser.cmd.get7put.sget.Rule_cmdSgetObject;
+import com.litecoding.smali2java.parser.cmd.get7put.sget.Rule_cmdSgetShort;
+import com.litecoding.smali2java.parser.cmd.get7put.sget.Rule_cmdSgetWide;
+import com.litecoding.smali2java.parser.cmd.get7put.sput.Rule_cmdSput;
+import com.litecoding.smali2java.parser.cmd.get7put.sput.Rule_cmdSputBoolean;
+import com.litecoding.smali2java.parser.cmd.get7put.sput.Rule_cmdSputByte;
+import com.litecoding.smali2java.parser.cmd.get7put.sput.Rule_cmdSputChar;
+import com.litecoding.smali2java.parser.cmd.get7put.sput.Rule_cmdSputObject;
+import com.litecoding.smali2java.parser.cmd.get7put.sput.Rule_cmdSputShort;
+import com.litecoding.smali2java.parser.cmd.get7put.sput.Rule_cmdSputWide;
 import com.litecoding.smali2java.parser.cmd.gotoz.Rule_cmdGoto;
 import com.litecoding.smali2java.parser.cmd.gotoz.Rule_cmdGoto16;
 import com.litecoding.smali2java.parser.cmd.gotoz.Rule_cmdGoto32;
@@ -55,13 +138,21 @@ import com.litecoding.smali2java.parser.cmd.ifz.Rule_cmdIfLt;
 import com.litecoding.smali2java.parser.cmd.ifz.Rule_cmdIfLtz;
 import com.litecoding.smali2java.parser.cmd.ifz.Rule_cmdIfNe;
 import com.litecoding.smali2java.parser.cmd.ifz.Rule_cmdIfNez;
-import com.litecoding.smali2java.parser.cmd.iget.Rule_cmdIget;
-import com.litecoding.smali2java.parser.cmd.iget.Rule_cmdIgetBoolean;
-import com.litecoding.smali2java.parser.cmd.iget.Rule_cmdIgetByte;
-import com.litecoding.smali2java.parser.cmd.iget.Rule_cmdIgetChar;
-import com.litecoding.smali2java.parser.cmd.iget.Rule_cmdIgetObject;
-import com.litecoding.smali2java.parser.cmd.iget.Rule_cmdIgetShort;
-import com.litecoding.smali2java.parser.cmd.iget.Rule_cmdIgetWide;
+import com.litecoding.smali2java.parser.cmd.int3long2.shl.Rule_cmdShlInt;
+import com.litecoding.smali2java.parser.cmd.int3long2.shl.Rule_cmdShlInt2addr;
+import com.litecoding.smali2java.parser.cmd.int3long2.shl.Rule_cmdShlIntLit8;
+import com.litecoding.smali2java.parser.cmd.int3long2.shl.Rule_cmdShlLong;
+import com.litecoding.smali2java.parser.cmd.int3long2.shl.Rule_cmdShlLong2addr;
+import com.litecoding.smali2java.parser.cmd.int3long2.shr.Rule_cmdShrInt;
+import com.litecoding.smali2java.parser.cmd.int3long2.shr.Rule_cmdShrInt2addr;
+import com.litecoding.smali2java.parser.cmd.int3long2.shr.Rule_cmdShrIntLit8;
+import com.litecoding.smali2java.parser.cmd.int3long2.shr.Rule_cmdShrLong;
+import com.litecoding.smali2java.parser.cmd.int3long2.shr.Rule_cmdShrLong2addr;
+import com.litecoding.smali2java.parser.cmd.int3long2.ushr.Rule_cmdUshrInt;
+import com.litecoding.smali2java.parser.cmd.int3long2.ushr.Rule_cmdUshrInt2addr;
+import com.litecoding.smali2java.parser.cmd.int3long2.ushr.Rule_cmdUshrIntLit8;
+import com.litecoding.smali2java.parser.cmd.int3long2.ushr.Rule_cmdUshrLong;
+import com.litecoding.smali2java.parser.cmd.int3long2.ushr.Rule_cmdUshrLong2addr;
 import com.litecoding.smali2java.parser.cmd.invoke.Rule_cmdInvokeDirect;
 import com.litecoding.smali2java.parser.cmd.invoke.Rule_cmdInvokeDirectRange;
 import com.litecoding.smali2java.parser.cmd.invoke.Rule_cmdInvokeInterface;
@@ -72,13 +163,6 @@ import com.litecoding.smali2java.parser.cmd.invoke.Rule_cmdInvokeSuper;
 import com.litecoding.smali2java.parser.cmd.invoke.Rule_cmdInvokeSuperRange;
 import com.litecoding.smali2java.parser.cmd.invoke.Rule_cmdInvokeVirtual;
 import com.litecoding.smali2java.parser.cmd.invoke.Rule_cmdInvokeVirtualRange;
-import com.litecoding.smali2java.parser.cmd.iput.Rule_cmdIput;
-import com.litecoding.smali2java.parser.cmd.iput.Rule_cmdIputBoolean;
-import com.litecoding.smali2java.parser.cmd.iput.Rule_cmdIputByte;
-import com.litecoding.smali2java.parser.cmd.iput.Rule_cmdIputChar;
-import com.litecoding.smali2java.parser.cmd.iput.Rule_cmdIputObject;
-import com.litecoding.smali2java.parser.cmd.iput.Rule_cmdIputShort;
-import com.litecoding.smali2java.parser.cmd.iput.Rule_cmdIputWide;
 import com.litecoding.smali2java.parser.cmd.move.Rule_cmdMove;
 import com.litecoding.smali2java.parser.cmd.move.Rule_cmdMove16;
 import com.litecoding.smali2java.parser.cmd.move.Rule_cmdMoveException;
@@ -92,10 +176,43 @@ import com.litecoding.smali2java.parser.cmd.move.Rule_cmdMoveResultWide;
 import com.litecoding.smali2java.parser.cmd.move.Rule_cmdMoveWide;
 import com.litecoding.smali2java.parser.cmd.move.Rule_cmdMoveWide16;
 import com.litecoding.smali2java.parser.cmd.move.Rule_cmdMoveWideFrom16;
+import com.litecoding.smali2java.parser.cmd.neg.Rule_cmdNegDouble;
+import com.litecoding.smali2java.parser.cmd.neg.Rule_cmdNegFloat;
+import com.litecoding.smali2java.parser.cmd.neg.Rule_cmdNegInt;
+import com.litecoding.smali2java.parser.cmd.neg.Rule_cmdNegLong;
+import com.litecoding.smali2java.parser.cmd.newz.Rule_cmdNewArray;
+import com.litecoding.smali2java.parser.cmd.newz.Rule_cmdNewInstance;
+import com.litecoding.smali2java.parser.cmd.rem.Rule_cmdRemDouble;
+import com.litecoding.smali2java.parser.cmd.rem.Rule_cmdRemDouble2addr;
+import com.litecoding.smali2java.parser.cmd.rem.Rule_cmdRemFloat;
+import com.litecoding.smali2java.parser.cmd.rem.Rule_cmdRemFloat2addr;
+import com.litecoding.smali2java.parser.cmd.rem.Rule_cmdRemInt;
+import com.litecoding.smali2java.parser.cmd.rem.Rule_cmdRemInt2addr;
+import com.litecoding.smali2java.parser.cmd.rem.Rule_cmdRemIntLit16;
+import com.litecoding.smali2java.parser.cmd.rem.Rule_cmdRemIntLit8;
+import com.litecoding.smali2java.parser.cmd.rem.Rule_cmdRemLong;
+import com.litecoding.smali2java.parser.cmd.rem.Rule_cmdRemLong2addr;
 import com.litecoding.smali2java.parser.cmd.returnz.Rule_cmdReturn;
 import com.litecoding.smali2java.parser.cmd.returnz.Rule_cmdReturnObject;
 import com.litecoding.smali2java.parser.cmd.returnz.Rule_cmdReturnVoid;
 import com.litecoding.smali2java.parser.cmd.returnz.Rule_cmdReturnWide;
+import com.litecoding.smali2java.parser.cmd.to.Rule_cmdDoubleToFloat;
+import com.litecoding.smali2java.parser.cmd.to.Rule_cmdDoubleToInt;
+import com.litecoding.smali2java.parser.cmd.to.Rule_cmdDoubleToLong;
+import com.litecoding.smali2java.parser.cmd.to.Rule_cmdFloatToDouble;
+import com.litecoding.smali2java.parser.cmd.to.Rule_cmdFloatToInt;
+import com.litecoding.smali2java.parser.cmd.to.Rule_cmdFloatToLong;
+import com.litecoding.smali2java.parser.cmd.to.Rule_cmdIntToByte;
+import com.litecoding.smali2java.parser.cmd.to.Rule_cmdIntToChar;
+import com.litecoding.smali2java.parser.cmd.to.Rule_cmdIntToDouble;
+import com.litecoding.smali2java.parser.cmd.to.Rule_cmdIntToFloat;
+import com.litecoding.smali2java.parser.cmd.to.Rule_cmdIntToLong;
+import com.litecoding.smali2java.parser.cmd.to.Rule_cmdIntToShort;
+import com.litecoding.smali2java.parser.cmd.to.Rule_cmdLongToDouble;
+import com.litecoding.smali2java.parser.cmd.to.Rule_cmdLongToFloat;
+import com.litecoding.smali2java.parser.cmd.to.Rule_cmdLongToInt;
+import com.litecoding.smali2java.parser.method.MethodParamRule;
+import com.litecoding.smali2java.parser.method.Rule_methodLocal;
 import com.litecoding.smali2java.parser.smali.Rule_codeRegister;
 import com.litecoding.smali2java.parser.smali.Rule_codeRegister64;
 import com.litecoding.smali2java.parser.smali.Rule_codeRegisterGroup;
@@ -1269,7 +1386,22 @@ public abstract class BasicCommandsBuilder extends BasicSmaliBuilder {
 	public Object visit(Rule_cmdXorLong2addr rule) {
 		return generateCmdFromRules(rule.rules);
 	}
-	
+
+	@Override
+	public Object visit(MethodParamRule rule) {
+		return generateCmdFromRules(rule.rules);
+	}
+
+	@Override
+	public Object visit(Rule_methodLocal rule) {
+		return generateCmdFromRules(rule.rules);
+	}
+
+	@Override
+	public Object visit(Rule_methodLine rule) {
+		return generateCmdFromRules(rule.rules);
+	}
+
 	/*
 	 * Internal methods
 	 */
@@ -1306,8 +1438,9 @@ public abstract class BasicCommandsBuilder extends BasicSmaliBuilder {
 					innerRule instanceof Rule_smaliFieldRef ||
 					innerRule instanceof Rule_smaliMethodRef) {
 				command.getArguments().add((SmaliCodeEntity)innerRule.accept(this));
-			} else if(innerRule instanceof Rule_intValue ||
-					innerRule instanceof Rule_strValue) {
+			}
+			//
+			else if(innerRule instanceof Rule_intValue || innerRule instanceof Rule_strValue) {
 				Value innerValue = new Value();
 				innerValue.setName(innerRule.spelling);
 				command.getArguments().add(innerValue);

@@ -2,15 +2,15 @@ package com.litecoding.smali2java.builder;
 
 import java.util.List;
 
-import com.litecoding.smali2java.entity.smali.ClassRef;
-import com.litecoding.smali2java.entity.smali.SmaliCodeEntity;
 import com.litecoding.smali2java.entity.smali.EntityFactory;
-import com.litecoding.smali2java.entity.smali.MethodRef;
 import com.litecoding.smali2java.entity.smali.Param;
-import com.litecoding.smali2java.entity.smali.SmaliClass;
-import com.litecoding.smali2java.entity.smali.SmaliMethod;
-import com.litecoding.smali2java.entity.smali.Register;
-import com.litecoding.smali2java.entity.smali.RegisterGroup;
+import com.litecoding.smali2java.entity.smali.ref.ClassRef;
+import com.litecoding.smali2java.entity.smali.ref.MethodRef;
+import com.litecoding.smali2java.entity.smali.ref.Register;
+import com.litecoding.smali2java.entity.smali.ref.RegisterGroup;
+import com.litecoding.smali2java.entity.smali.ref.SmaliCodeEntity;
+import com.litecoding.smali2java.entity.smali.smali.SmaliClass;
+import com.litecoding.smali2java.entity.smali.smali.SmaliMethod;
 import com.litecoding.smali2java.parser.*;
 import com.litecoding.smali2java.parser.cmd.Rule_codeLabel;
 import com.litecoding.smali2java.parser.method.Rule_classMethodProto;
