@@ -16,22 +16,17 @@ import com.litecoding.smali2java.builder.Visitor;
 import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
 import com.litecoding.smali2java.parser.Terminal_StringValue;
-import com.litecoding.smali2java.parser.method.Rule_classMethodProto;
 
-final public class Rule_dirMethod extends Rule
-{
-  private Rule_dirMethod(String spelling, ArrayList<Rule> rules)
-  {
+final public class Rule_dirMethod extends Rule {
+  private Rule_dirMethod(String spelling, ArrayList<Rule> rules) {
     super(spelling, rules);
   }
 
-  public Object accept(Visitor visitor)
-  {
+  public Object accept(Visitor visitor) {
     return visitor.visit(this);
   }
 
-  public static Rule_dirMethod parse(ParserContext context)
-  {
+  public static Rule_dirMethod parse(ParserContext context) {
     context.push("dirMethod");
 
     boolean parsed = true;
@@ -40,55 +35,18 @@ final public class Rule_dirMethod extends Rule
     Rule rule;
 
     parsed = false;
-    if (!parsed)
-    {
+    if (!parsed) {
         ArrayList<Rule> e1 = new ArrayList<Rule>();
         int s1 = context.index;
         parsed = true;
-        if (parsed)
-        {
+        if (parsed) {
           boolean f1 = true;
           int c1 = 0;
-          for (int i1 = 0; i1 < 1 && f1; i1++)
-          {
+          for (int i1 = 0; i1 < 1 && f1; i1++) {
             rule = Terminal_StringValue.parse(context, ".method");
-            if (f1 = rule != null)
-            {
+            if (f1 = rule != null) {
               e1.add(rule);
               c1++;
-				// 空格
-				rule = Rule_padding.parse(context);
-				if (rule != null) {
-					e1.add(rule);
-				}
-				// 修饰符
-				rule = Rule_accessMode.parse(context);
-				if (rule != null) {
-					e1.add(rule);
-				}
-				// 空格
-				rule = Rule_padding.parse(context);
-				if (rule != null) {
-					e1.add(rule);
-				}
-				// 构造方法
-				rule = Rule_classConstructorName.parse(context);
-				if (rule != null) {
-					e1.add(rule);
-				}
-				// virtual method
-				else {
-					// 方法名
-					rule = Rule_qualifier.parse(context);
-					if (rule != null) {
-						e1.add(rule);
-					}
-				}
-				// 参数
-				rule = Rule_classMethodProto.parse(context);
-				if (rule != null) {
-					e1.add(rule);
-				}
             }
           }
           parsed = c1 == 1;
