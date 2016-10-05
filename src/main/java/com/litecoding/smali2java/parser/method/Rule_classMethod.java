@@ -131,6 +131,7 @@ final public class Rule_classMethod extends Rule
               e1.add(rule);
 //              c1++;
             }
+            System.out.println(rule.rules);// TODO
             }
           }
           sb.append(context.text);
@@ -361,24 +362,6 @@ final public class Rule_classMethod extends Rule
 //          int c1 = 0;
 //          for (int i1 = 0; i1 < 1 && f1; i1++)
 //          {
-            rule = Rule_methodBody.parse(context);
-            if (/*f1 = */rule != null)
-            {
-              e1.add(rule);
-//              c1++;
-            }
-//          }
-//          parsed = c1 == 1;
-//        }
-        
-        /* */
-        
-//        if (parsed)
-//        {
-//          boolean f1 = true;
-//          int c1 = 0;
-//          for (int i1 = 0; i1 < 1 && f1; i1++)
-//          {
 //            rule = Rule_optPadding.parse(context);
 //            if ((f1 = rule != null))
 //            {
@@ -400,10 +383,38 @@ final public class Rule_classMethod extends Rule
             rule = Rule_dirEndMethod.parse(context);
             if (/*f1 = */rule != null)
             {
+            	// method body
+            	
+                
+                /* */
+            	
+            	
+					
+//                if (parsed)
+//                {
+//                  boolean f1 = true;
+//                  int c1 = 0;
+//                  for (int i1 = 0; i1 < 1 && f1; i1++)
+//                  {
+						
+					Rule rule2 = Rule_methodBody.parse(sb.toString());
+					    if (/*f1 = */rule != null)
+					    {
+					      e1.add(rule2);
+//                      c1++;
+					    }
+//                  }
+//                  parsed = c1 == 1;
+//                }
+					
+            	
               e1.add(rule);
               e0.addAll(e1);
 //              c1++;
               rule_classMethod = new Rule_classMethod(sb.toString(), e0);
+              
+              System.out.println(rule.rules);// TODO
+              
               return rule_classMethod;
             }
           }
