@@ -8,6 +8,6 @@ public abstract class LineRule extends Rule {
 
 	protected LineRule(String spelling, ArrayList<Rule> rules) {
 		super(spelling, rules);
-		System.out.println(rules);
+//		System.out.print(rules);
 	}
 }
