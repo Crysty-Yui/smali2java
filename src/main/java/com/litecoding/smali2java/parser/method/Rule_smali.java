@@ -24,30 +24,25 @@ import com.litecoding.smali2java.parser.Rule;
 import com.litecoding.smali2java.parser.smali.Rule_skipLine;
 import com.litecoding.smali2java.renderer.ClassRenderer;
 
-final public class Rule_smali extends Rule
-{
+final public class Rule_smali extends Rule {
 	static Rule rule;
 	static ArrayList<Rule> e0 = new ArrayList<Rule>();
-  private Rule_smali(String spelling, ArrayList<Rule> rules)
-  {
+  private Rule_smali(String spelling, ArrayList<Rule> rules) {
     super(spelling, rules);
   }
 
-  public Object accept(Visitor visitor)
-  {
+  public Object accept(Visitor visitor) {
     return visitor.visit(this);
   }
 
-  public static Rule_smali parse(ParserContext context)
-  {
+  public static Rule_smali parse(ParserContext context) {
     context.push("smali");
 
     boolean parsed = true;
     int s0 = context.index;
 
     parsed = false;
-    if (!parsed)
-    {
+    if (!parsed) {
         ArrayList<Rule> e1 = new ArrayList<Rule>();
         int s1 = context.index;
         parsed = true;
@@ -61,7 +56,7 @@ final public class Rule_smali extends Rule
 //          for (int i1 = 0; i1 < 1/* && f1*/; i1++)
 //          {
 //            rule = Rule_classHeader.parse(context);
-//            if ((/*f1 = */rule != null))
+//            if (/*f1 = */rule != null)
 //            {
 //              e1.add(rule);
 //              c1++;
@@ -73,8 +68,7 @@ final public class Rule_smali extends Rule
         /* .class */
         
         rule = Rule_classClass.parse(context);
-        if ((/*f1 = */rule != null))
-        {
+        if (/*f1 = */rule != null) {
           e1.add(rule);
 //          c1++;
         }
@@ -82,8 +76,7 @@ final public class Rule_smali extends Rule
         /* .super */
         
         rule = Rule_classSuper.parse(context);
-        if ((/*f1 = */rule != null))
-        {
+        if (/*f1 = */rule != null) {
           e1.add(rule);
 //          c1++;
         }
@@ -91,29 +84,22 @@ final public class Rule_smali extends Rule
 //        System.out.println(context.text.substring(s0, context.index));
         /* field */
         
-        if (parsed)
-        {
+        if (parsed) {
           boolean f1 = true;
-          @SuppressWarnings("unused")
-          int c1 = 0;
-          while (f1)
-          {
+//          int c1 = 0;
+          while (f1) {
             int g1 = context.index;
             parsed = false;
-            if (!parsed)
-            {
+            if (!parsed) {
                 ArrayList<Rule> e2 = new ArrayList<Rule>();
                 int s2 = context.index;
                 parsed = true;
-                if (parsed)
-                {
+                if (parsed) {
                   boolean f2 = true;
                   int c2 = 0;
-                  for (int i2 = 0; i2 < 1 && f2; i2++)
-                  {
+                  for (int i2 = 0; i2 < 1 && f2; i2++) {
                     rule = Rule_classField.parse(context);
-                    if ((f2 = rule != null))
-                    {
+                    if (f2 = rule != null) {
                       e2.add(rule);
                       c2++;
                     }
@@ -125,20 +111,16 @@ final public class Rule_smali extends Rule
                 else
                   context.index = s2;
             }
-            if (!parsed)
-            {
+            if (!parsed) {
                 ArrayList<Rule> e2 = new ArrayList<Rule>();
                 int s2 = context.index;
                 parsed = true;
-                if (parsed)
-                {
+                if (parsed) {
                   boolean f2 = true;
                   int c2 = 0;
-                  for (int i2 = 0; i2 < 1 && f2; i2++)
-                  {
+                  for (int i2 = 0; i2 < 1 && f2; i2++) {
                     rule = Rule_skipLine.parse(context);
-                    if ((f2 = rule != null))
-                    {
+                    if (f2 = rule != null) {
                       e2.add(rule);
                       c2++;
                     }
@@ -151,38 +133,31 @@ final public class Rule_smali extends Rule
                   context.index = s2;
             }
             f1 = context.index > g1;
-            if (parsed) c1++;
+//            if (parsed) c1++;
           }
           parsed = true;
         }
-        
+
 //        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>> field");
 //        System.out.println(context.text.substring(s0, context.index));
         /* method */
-        
-        if (parsed)
-        {
+
+        if (parsed) {
           boolean f1 = true;
-          @SuppressWarnings("unused")
-          int c1 = 0;
-          while (f1)
-          {
+//          int c1 = 0;
+          while (f1) {
             int g1 = context.index;
             parsed = false;
-            if (!parsed)
-            {
+            if (!parsed) {
                 ArrayList<Rule> e2 = new ArrayList<Rule>();
                 int s2 = context.index;
                 parsed = true;
-                if (parsed)
-                {
+                if (parsed) {
                   boolean f2 = true;
                   int c2 = 0;
-                  for (int i2 = 0; i2 < 1 && f2; i2++)
-                  {
+                  for (int i2 = 0; i2 < 1 && f2; i2++) {
                     rule = Rule_classMethod.parse(context);
-                    if (f2 = rule != null)
-                    {
+                    if (f2 = rule != null) {
                       e2.add(rule);
                       c2++;
                     }
@@ -194,20 +169,16 @@ final public class Rule_smali extends Rule
                 else
                   context.index = s2;
             }
-            if (!parsed)
-            {
+            if (!parsed) {
                 ArrayList<Rule> e2 = new ArrayList<Rule>();
                 int s2 = context.index;
                 parsed = true;
-                if (parsed)
-                {
+                if (parsed) {
                   boolean f2 = true;
                   int c2 = 0;
-                  for (int i2 = 0; i2 < 1 && f2; i2++)
-                  {
+                  for (int i2 = 0; i2 < 1 && f2; i2++) {
                     rule = Rule_skipLine.parse(context);
-                    if ((f2 = rule != null))
-                    {
+                    if (f2 = rule != null) {
                       e2.add(rule);
                       c2++;
 //                      System.out.println("----------------------------------------------");
@@ -221,7 +192,7 @@ final public class Rule_smali extends Rule
                   context.index = s2;
             }
             f1 = context.index > g1;
-            if (parsed) c1++;
+//            if (parsed) c1++;
           }
           parsed = true;
         }
@@ -265,7 +236,7 @@ final public class Rule_smali extends Rule
 			SmaliClass smaliClass = (SmaliClass)rule.accept(new SmaliClassBuilder());
 			
 			String ret = ClassRenderer.renderObject(smaliClass);
-			System.out.println(ret);
+//			System.out.println(ret);
 		}
 	}
 }
