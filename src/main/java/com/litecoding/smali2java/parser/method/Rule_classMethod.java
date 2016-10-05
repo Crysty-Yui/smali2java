@@ -80,37 +80,32 @@ final public class Rule_classMethod extends Rule
           for (int i1 = 0; i1 < 1/* && f1*/; i1++)
           {
             rule = Rule_dirMethod.parse(context);
-            if (/*f1 = */rule != null)
-            {
+            if (/*f1 = */rule != null) {
             	sb.delete(0, sb.length());
             	e0.clear();
               e1.add(rule);
 //              c1++;
               // 空格
               rule = Rule_padding.parse(context);
-              if (/*f1 = */rule != null)
-              {
+              if (/*f1 = */rule != null) {
                 e1.add(rule);
 //                c1++;
               }
               // 修饰符
                 rule = Rule_accessMode.parse(context);
-                if (/*f2 = */rule != null)
-                {
+                if (/*f2 = */rule != null) {
               	  e1.add(rule);
 //                        c2++;
                 }
              // 空格
                 rule = Rule_padding.parse(context);
-                if (/*f1 = */rule != null)
-                {
+                if (/*f1 = */rule != null) {
                   e1.add(rule);
 //                  c1++;
                 }
                 // 构造方法
               rule = Rule_classConstructorName.parse(context);
-              if (/*f2 = */rule != null)
-              {
+              if (/*f2 = */rule != null) {
                 e1.add(rule);
 //                c2++;
               }
@@ -118,16 +113,14 @@ final public class Rule_classMethod extends Rule
               else {
                 // 方法名
                 rule = Rule_qualifier.parse(context);
-              if (/*f2 = */rule != null)
-              {
+              if (/*f2 = */rule != null) {
                 e1.add(rule);
 //                c2++;
               }
               }
               // 参数
               rule = Rule_classMethodProto.parse(context);
-            if (/*f1 = */rule != null)
-            {
+            if (/*f1 = */rule != null) {
               e1.add(rule);
 //              c1++;
             }
