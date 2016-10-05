@@ -16,6 +16,7 @@ import com.litecoding.smali2java.builder.Visitor;
 import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
 import com.litecoding.smali2java.parser.Terminal_StringValue;
+import com.litecoding.smali2java.parser.method.Rule_classMethodProto;
 
 final public class Rule_dirMethod extends Rule
 {
@@ -55,6 +56,39 @@ final public class Rule_dirMethod extends Rule
             {
               e1.add(rule);
               c1++;
+				// 空格
+				rule = Rule_padding.parse(context);
+				if (rule != null) {
+					e1.add(rule);
+				}
+				// 修饰符
+				rule = Rule_accessMode.parse(context);
+				if (rule != null) {
+					e1.add(rule);
+				}
+				// 空格
+				rule = Rule_padding.parse(context);
+				if (rule != null) {
+					e1.add(rule);
+				}
+				// 构造方法
+				rule = Rule_classConstructorName.parse(context);
+				if (rule != null) {
+					e1.add(rule);
+				}
+				// virtual method
+				else {
+					// 方法名
+					rule = Rule_qualifier.parse(context);
+					if (rule != null) {
+						e1.add(rule);
+					}
+				}
+				// 参数
+				rule = Rule_classMethodProto.parse(context);
+				if (rule != null) {
+					e1.add(rule);
+				}
             }
           }
           parsed = c1 == 1;
