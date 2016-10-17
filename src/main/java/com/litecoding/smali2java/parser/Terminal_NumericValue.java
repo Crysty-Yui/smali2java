@@ -13,6 +13,8 @@ package com.litecoding.smali2java.parser;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
+import com.litecoding.smali2java.builder.Visitor;
+
 public class Terminal_NumericValue extends Rule
 {
   private Terminal_NumericValue(String spelling, ArrayList<Rule> rules)

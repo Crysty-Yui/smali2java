@@ -12,6 +12,8 @@ package com.litecoding.smali2java.parser;
 
 import java.util.ArrayList;
 
+import com.litecoding.smali2java.builder.Visitor;
+
 public class Terminal_StringValue extends Rule
 {
   private Terminal_StringValue(String spelling, ArrayList<Rule> rules)
