@@ -27,26 +27,27 @@ import com.litecoding.smali2java.renderer.ClassRenderer;
 final public class Rule_smali extends Rule {
 	static Rule rule;
 	static ArrayList<Rule> e0 = new ArrayList<Rule>();
-  private Rule_smali(String spelling, ArrayList<Rule> rules) {
-    super(spelling, rules);
-  }
 
-  public Object accept(Visitor visitor) {
-    return visitor.visit(this);
-  }
+	private Rule_smali(String spelling, ArrayList<Rule> rules) {
+		super(spelling, rules);
+	}
 
-  public static Rule_smali parse(ParserContext context) {
-    context.push("smali");
+	public Object accept(Visitor visitor) {
+		return visitor.visit(this);
+	}
 
-    boolean parsed = true;
-    int s0 = context.index;
+	public static Rule_smali parse(ParserContext context) {
+		context.push("smali");
 
-    parsed = false;
-    if (!parsed) {
-        ArrayList<Rule> e1 = new ArrayList<Rule>();
-        int s1 = context.index;
-        parsed = true;
-        
+		boolean parsed = true;
+		int s0 = context.index;
+
+		parsed = false;
+		if (!parsed) {
+			ArrayList<Rule> e1 = new ArrayList<Rule>();
+			int s1 = context.index;
+			parsed = true;
+
         /* header */
         
 //        if (parsed)
@@ -64,158 +65,158 @@ final public class Rule_smali extends Rule {
 //          }
 //          parsed = c1 == 1;
 //        }
-        
-        /* .class */
-        
-        rule = Rule_classClass.parse(context);
-        if (/*f1 = */rule != null) {
-          e1.add(rule);
-//          c1++;
-        }
-        
-        /* .super */
-        
-        rule = Rule_classSuper.parse(context);
-        if (/*f1 = */rule != null) {
-          e1.add(rule);
-//          c1++;
-        }
-        
-//        System.out.println(context.text.substring(s0, context.index));
-        /* field */
-        
-        if (parsed) {
-          boolean f1 = true;
-//          int c1 = 0;
-          while (f1) {
-            int g1 = context.index;
-            parsed = false;
-            if (!parsed) {
-                ArrayList<Rule> e2 = new ArrayList<Rule>();
-                int s2 = context.index;
-                parsed = true;
-                if (parsed) {
-                  boolean f2 = true;
-                  int c2 = 0;
-                  for (int i2 = 0; i2 < 1 && f2; i2++) {
-                    rule = Rule_classField.parse(context);
-                    if (f2 = rule != null) {
-                      e2.add(rule);
-                      c2++;
-                    }
-                  }
-                  parsed = c2 == 1;
-                }
-                if (parsed)
-                  e1.addAll(e2);
-                else
-                  context.index = s2;
-            }
-            if (!parsed) {
-                ArrayList<Rule> e2 = new ArrayList<Rule>();
-                int s2 = context.index;
-                parsed = true;
-                if (parsed) {
-                  boolean f2 = true;
-                  int c2 = 0;
-                  for (int i2 = 0; i2 < 1 && f2; i2++) {
-                    rule = Rule_skipLine.parse(context);
-                    if (f2 = rule != null) {
-                      e2.add(rule);
-                      c2++;
-                    }
-                  }
-                  parsed = c2 == 1;
-                }
-                if (parsed)
-                  e1.addAll(e2);
-                else
-                  context.index = s2;
-            }
-            f1 = context.index > g1;
-//            if (parsed) c1++;
-          }
-          parsed = true;
-        }
 
-//        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>> field");
-//        System.out.println(context.text.substring(s0, context.index));
-        /* method */
+			/* .class */
 
-        if (parsed) {
-          boolean f1 = true;
-//          int c1 = 0;
-          while (f1) {
-            int g1 = context.index;
-            parsed = false;
-            if (!parsed) {
-                ArrayList<Rule> e2 = new ArrayList<Rule>();
-                int s2 = context.index;
-                parsed = true;
-                if (parsed) {
-                  boolean f2 = true;
-                  int c2 = 0;
-                  for (int i2 = 0; i2 < 1 && f2; i2++) {
-                    rule = Rule_classMethod.parse(context);
-                    if (f2 = rule != null) {
-                      e2.add(rule);
-                      c2++;
-                    }
-                  }
-                  parsed = c2 == 1;
-                }
-                if (parsed)
-                  e1.addAll(e2);
-                else
-                  context.index = s2;
-            }
-            if (!parsed) {
-                ArrayList<Rule> e2 = new ArrayList<Rule>();
-                int s2 = context.index;
-                parsed = true;
-                if (parsed) {
-                  boolean f2 = true;
-                  int c2 = 0;
-                  for (int i2 = 0; i2 < 1 && f2; i2++) {
-                    rule = Rule_skipLine.parse(context);
-                    if (f2 = rule != null) {
-                      e2.add(rule);
-                      c2++;
-//                      System.out.println("----------------------------------------------");
-                    }
-                  }
-                  parsed = c2 == 1;
-                }
-                if (parsed)
-                  e1.addAll(e2);
-                else
-                  context.index = s2;
-            }
-            f1 = context.index > g1;
-//            if (parsed) c1++;
-          }
-          parsed = true;
-        }
-        
-//        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>> method");
-//        System.out.println(context.text.substring(s0, context.index));
-        
-        if (parsed)
-          e0.addAll(e1);
-        else
-          context.index = s1;
-    }
+			rule = Rule_classClass.parse(context);
+			if (/* f1 = */rule != null) {
+				e1.add(rule);
+				// c1++;
+			}
 
-    rule = null;
-    if (parsed)
-      rule = new Rule_smali(context.text.substring(s0, context.index), e0);
-    else
-      context.index = s0;
+			/* .super */
 
-    context.pop("smali", parsed);
+			rule = Rule_classSuper.parse(context);
+			if (/* f1 = */rule != null) {
+				e1.add(rule);
+				// c1++;
+			}
 
-    return (Rule_smali)rule;
-  }
+			// System.out.println(context.text.substring(s0, context.index));
+			/* field */
+
+			if (parsed) {
+				boolean f1 = true;
+				// int c1 = 0;
+				while (f1) {
+					int g1 = context.index;
+					parsed = false;
+					if (!parsed) {
+						ArrayList<Rule> e2 = new ArrayList<Rule>();
+						int s2 = context.index;
+						parsed = true;
+						if (parsed) {
+							boolean f2 = true;
+							int c2 = 0;
+							for (int i2 = 0; i2 < 1 && f2; i2++) {
+								rule = Rule_classField.parse(context);
+								if (f2 = rule != null) {
+									e2.add(rule);
+									c2++;
+								}
+							}
+							parsed = c2 == 1;
+						}
+						if (parsed)
+							e1.addAll(e2);
+						else
+							context.index = s2;
+					}
+					if (!parsed) {
+						ArrayList<Rule> e2 = new ArrayList<Rule>();
+						int s2 = context.index;
+						parsed = true;
+						if (parsed) {
+							boolean f2 = true;
+							int c2 = 0;
+							for (int i2 = 0; i2 < 1 && f2; i2++) {
+								rule = Rule_skipLine.parse(context);
+								if (f2 = rule != null) {
+									e2.add(rule);
+									c2++;
+								}
+							}
+							parsed = c2 == 1;
+						}
+						if (parsed)
+							e1.addAll(e2);
+						else
+							context.index = s2;
+					}
+					f1 = context.index > g1;
+					// if (parsed) c1++;
+				}
+				parsed = true;
+			}
+
+			// System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>> field");
+			// System.out.println(context.text.substring(s0, context.index));
+			/* method */
+
+			if (parsed) {
+				boolean f1 = true;
+				// int c1 = 0;
+				while (f1) {
+					int g1 = context.index;
+					parsed = false;
+					if (!parsed) {
+						ArrayList<Rule> e2 = new ArrayList<Rule>();
+						int s2 = context.index;
+						parsed = true;
+						if (parsed) {
+							boolean f2 = true;
+							int c2 = 0;
+							for (int i2 = 0; i2 < 1 && f2; i2++) {
+								rule = Rule_classMethod.parse(context);
+								if (f2 = rule != null) {
+									e2.add(rule);
+									c2++;
+								}
+							}
+							parsed = c2 == 1;
+						}
+						if (parsed)
+							e1.addAll(e2);
+						else
+							context.index = s2;
+					}
+					if (!parsed) {
+						ArrayList<Rule> e2 = new ArrayList<Rule>();
+						int s2 = context.index;
+						parsed = true;
+						if (parsed) {
+							boolean f2 = true;
+							int c2 = 0;
+							for (int i2 = 0; i2 < 1 && f2; i2++) {
+								rule = Rule_skipLine.parse(context);
+								if (f2 = rule != null) {
+									e2.add(rule);
+									c2++;
+									// System.out.println("----------------------------------------------");
+								}
+							}
+							parsed = c2 == 1;
+						}
+						if (parsed)
+							e1.addAll(e2);
+						else
+							context.index = s2;
+					}
+					f1 = context.index > g1;
+					// if (parsed) c1++;
+				}
+				parsed = true;
+			}
+
+			// System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>> method");
+			// System.out.println(context.text.substring(s0, context.index));
+
+			if (parsed)
+				e0.addAll(e1);
+			else
+				context.index = s1;
+		}
+
+		rule = null;
+		if (parsed)
+			rule = new Rule_smali(context.text.substring(s0, context.index), e0);
+		else
+			context.index = s0;
+
+		context.pop("smali", parsed);
+
+		return (Rule_smali) rule;
+	}
 
 	public static void main(String[] args) throws Exception {
 //		ParserContext context = new ParserContext(FileUtils.readFileToString(new File("test/method_direct.txt")), true);
@@ -223,21 +224,21 @@ final public class Rule_smali extends Rule {
 //		if (rule != null) {
 //			System.out.println("rule: " + rule.rules);
 //		}
-		List<String> lines = FileUtils.readLines(new File("test/Yuki/view/CircleImageView.smali"));
+		List<String> lines = FileUtils.readLines(new File("test/smali/com/itheima/redbaby/BaseActivity.smali"));
 		for (String line : lines) {
 			ParserContext context = new ParserContext(line + "\n", false);
 			parse(context);
 		}
-		if (rule != null) {
-//			System.out.println("rule: " + rule.rules);
-			Rule r = rule;
-//			new SmaliClassBuilder().visit(rule_classMethod);
-			
-			SmaliClass smaliClass = (SmaliClass)rule.accept(new SmaliClassBuilder());
-			
-			String ret = ClassRenderer.renderObject(smaliClass);
-//			System.out.println(ret);
-		}
+//		if (rule != null) {
+////			System.out.println("rule: " + rule.rules);
+//			Rule r = rule;
+////			new SmaliClassBuilder().visit(rule_classMethod);
+//			
+//			SmaliClass smaliClass = (SmaliClass)rule.accept(new SmaliClassBuilder());
+//			
+//			String ret = ClassRenderer.renderObject(smaliClass);
+////			System.out.println(ret);
+//		}
 	}
 }
 
