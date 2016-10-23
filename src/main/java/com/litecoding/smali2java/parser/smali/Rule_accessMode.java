@@ -17,204 +17,177 @@ import com.litecoding.smali2java.parser.ParserContext;
 import com.litecoding.smali2java.parser.Rule;
 import com.litecoding.smali2java.parser.Terminal_StringValue;
 
-final public class Rule_accessMode extends Rule
-{
-  private Rule_accessMode(String spelling, ArrayList<Rule> rules)
-  {
-    super(spelling, rules);
-  }
+final public class Rule_accessMode extends Rule {
 
-  public Object accept(Visitor visitor)
-  {
-    return visitor.visit(this);
-  }
-
-  public static Rule_accessMode parse(ParserContext context)
-  {
-    context.push("accessMode");
-
-    boolean parsed = true;
-    int s0 = context.index;
-    ArrayList<Rule> e0 = new ArrayList<Rule>();
-    Rule rule;
-
-    parsed = false;
-    if (!parsed)
-    {
-      {
-        ArrayList<Rule> e1 = new ArrayList<Rule>();
-        int s1 = context.index;
-        parsed = true;
-        if (parsed)
-        {
-          boolean f1 = true;
-          int c1 = 0;
-          for (int i1 = 0; i1 < 1 && f1; i1++)
-          {
-            rule = Terminal_StringValue.parse(context, "public");
-            if ((f1 = rule != null))
-            {
-              e1.add(rule);
-              c1++;
-            }
-          }
-          parsed = c1 == 1;
-        }
-        if (parsed)
-          e0.addAll(e1);
-        else
-          context.index = s1;
-      }
-    }
-    if (!parsed)
-    {
-      {
-        ArrayList<Rule> e1 = new ArrayList<Rule>();
-        int s1 = context.index;
-        parsed = true;
-        if (parsed)
-        {
-          boolean f1 = true;
-          int c1 = 0;
-          for (int i1 = 0; i1 < 1 && f1; i1++)
-          {
-            rule = Terminal_StringValue.parse(context, "private");
-            if ((f1 = rule != null))
-            {
-              e1.add(rule);
-              c1++;
-            }
-          }
-          parsed = c1 == 1;
-        }
-        if (parsed)
-          e0.addAll(e1);
-        else
-          context.index = s1;
-      }
-    }
-    if (!parsed)
-    {
-      {
-        ArrayList<Rule> e1 = new ArrayList<Rule>();
-        int s1 = context.index;
-        parsed = true;
-        if (parsed)
-        {
-          boolean f1 = true;
-          int c1 = 0;
-          for (int i1 = 0; i1 < 1 && f1; i1++)
-          {
-            rule = Terminal_StringValue.parse(context, "protected");
-            if ((f1 = rule != null))
-            {
-              e1.add(rule);
-              c1++;
-            }
-          }
-          parsed = c1 == 1;
-        }
-        if (parsed)
-          e0.addAll(e1);
-        else
-          context.index = s1;
-      }
-    }
-    if (!parsed)
-    {
-      {
-        ArrayList<Rule> e1 = new ArrayList<Rule>();
-        int s1 = context.index;
-        parsed = true;
-        if (parsed)
-        {
-          boolean f1 = true;
-          int c1 = 0;
-          for (int i1 = 0; i1 < 1 && f1; i1++)
-          {
-            rule = Terminal_StringValue.parse(context, "static");
-            if ((f1 = rule != null))
-            {
-              e1.add(rule);
-              c1++;
-            }
-          }
-          parsed = c1 == 1;
-        }
-        if (parsed)
-          e0.addAll(e1);
-        else
-          context.index = s1;
-      }
-    }
-    if (!parsed)
-    {
-      {
-        ArrayList<Rule> e1 = new ArrayList<Rule>();
-        int s1 = context.index;
-        parsed = true;
-        if (parsed)
-        {
-          boolean f1 = true;
-          int c1 = 0;
-          for (int i1 = 0; i1 < 1 && f1; i1++)
-          {
-            rule = Terminal_StringValue.parse(context, "final");
-            if ((f1 = rule != null))
-            {
-              e1.add(rule);
-              c1++;
-            }
-          }
-          parsed = c1 == 1;
-        }
-        if (parsed)
-          e0.addAll(e1);
-        else
-          context.index = s1;
-      }
-    }
-    if (!parsed)
-    {
-      {
-        ArrayList<Rule> e1 = new ArrayList<Rule>();
-        int s1 = context.index;
-        parsed = true;
-        if (parsed)
-        {
-          boolean f1 = true;
-          int c1 = 0;
-          for (int i1 = 0; i1 < 1 && f1; i1++)
-          {
-            rule = Terminal_StringValue.parse(context, "abstract");
-            if ((f1 = rule != null))
-            {
-              e1.add(rule);
-              c1++;
-            }
-          }
-          parsed = c1 == 1;
-        }
-        if (parsed)
-          e0.addAll(e1);
-        else
-          context.index = s1;
-      }
+    private Rule_accessMode(String spelling, ArrayList<Rule> rules) {
+        super(spelling, rules);
     }
 
-    rule = null;
-    if (parsed)
-      rule = new Rule_accessMode(context.text.substring(s0, context.index), e0);
-    else
-      context.index = s0;
+    public Object accept(Visitor visitor) {
+        return visitor.visit(this);
+    }
 
-    context.pop("accessMode", parsed);
+    public static Rule_accessMode parse(ParserContext context) {
+        context.push("accessMode");
 
-    return (Rule_accessMode)rule;
-  }
+        boolean parsed = true;
+        int s0 = context.index;
+        ArrayList<Rule> e0 = new ArrayList<Rule>();
+        Rule rule;
+
+        parsed = false;
+        if (!parsed) {
+            ArrayList<Rule> e1 = new ArrayList<Rule>();
+            int s1 = context.index;
+            parsed = true;
+            if (parsed) {
+                boolean f1 = true;
+                int c1 = 0;
+                for (int i1 = 0; i1 < 1 && f1; i1++) {
+                    rule = Terminal_StringValue.parse(context, "public");
+                    if (f1 = rule != null) {
+                        e1.add(rule);
+                        c1++;
+                    }
+                }
+                parsed = c1 == 1;
+            }
+            if (parsed)
+                e0.addAll(e1);
+            else
+                context.index = s1;
+        }
+        if (!parsed) {
+            ArrayList<Rule> e1 = new ArrayList<Rule>();
+            int s1 = context.index;
+            parsed = true;
+            if (parsed) {
+                boolean f1 = true;
+                int c1 = 0;
+                for (int i1 = 0; i1 < 1 && f1; i1++) {
+                    rule = Terminal_StringValue.parse(context, "private");
+                    if (f1 = rule != null) {
+                        e1.add(rule);
+                        c1++;
+                    }
+                }
+                parsed = c1 == 1;
+            }
+            if (parsed)
+                e0.addAll(e1);
+            else
+                context.index = s1;
+        }
+        if (!parsed) {
+            ArrayList<Rule> e1 = new ArrayList<Rule>();
+            int s1 = context.index;
+            parsed = true;
+            if (parsed) {
+                boolean f1 = true;
+                int c1 = 0;
+                for (int i1 = 0; i1 < 1 && f1; i1++) {
+                    rule = Terminal_StringValue.parse(context, "protected");
+                    if (f1 = rule != null) {
+                        e1.add(rule);
+                        c1++;
+                    }
+                }
+                parsed = c1 == 1;
+            }
+            if (parsed)
+                e0.addAll(e1);
+            else
+                context.index = s1;
+        }
+
+        if (parsed) {
+            rule = Rule_padding.parse(context);
+            if (rule != null) {
+                e0.add(rule);
+            }
+            // parsed = true;
+        }
+        parsed = false;// TODO
+
+        if (!parsed) {
+            ArrayList<Rule> e1 = new ArrayList<Rule>();
+            int s1 = context.index;
+            parsed = true;
+            if (parsed) {
+                boolean f1 = true;
+                int c1 = 0;
+                for (int i1 = 0; i1 < 1 && f1; i1++) {
+                    rule = Terminal_StringValue.parse(context, "static");
+                    if (f1 = rule != null) {
+                        e1.add(rule);
+                        c1++;
+                    }
+                }
+                parsed = c1 == 1;
+            }
+            if (parsed)
+                e0.addAll(e1);
+            else
+                context.index = s1;
+        }
+        if (!parsed) {
+            ArrayList<Rule> e1 = new ArrayList<Rule>();
+            int s1 = context.index;
+            parsed = true;
+            if (parsed) {
+                boolean f1 = true;
+                int c1 = 0;
+                for (int i1 = 0; i1 < 1 && f1; i1++) {
+                    rule = Terminal_StringValue.parse(context, "final");
+                    if (f1 = rule != null) {
+                        e1.add(rule);
+                        c1++;
+                    }
+                }
+                parsed = c1 == 1;
+            }
+            if (parsed)
+                e0.addAll(e1);
+            else
+                context.index = s1;
+        }
+        if (!parsed) {
+            ArrayList<Rule> e1 = new ArrayList<Rule>();
+            int s1 = context.index;
+            parsed = true;
+            if (parsed) {
+                boolean f1 = true;
+                int c1 = 0;
+                for (int i1 = 0; i1 < 1 && f1; i1++) {
+                    rule = Terminal_StringValue.parse(context, "abstract");
+                    if (f1 = rule != null) {
+                        e1.add(rule);
+                        c1++;
+                    }
+                }
+                parsed = c1 == 1;
+            }
+            if (parsed)
+                e0.addAll(e1);
+            else
+                context.index = s1;
+        }
+
+        parsed = true;// TODO
+        rule = null;
+        if (parsed)
+            rule = new Rule_accessMode(context.text.substring(s0, context.index), e0);
+        else
+            context.index = s0;
+
+        context.pop("accessMode", parsed);
+
+        return (Rule_accessMode) rule;
+    }
+
+    public static void main(String[] args) {
+        ParserContext context = new ParserContext("protected abstract", false);
+        Rule rule = parse(context);
+        System.out.println(rule.rules);
+    }
 }
-
-/* -----------------------------------------------------------------------------
- * eof
- * -----------------------------------------------------------------------------
- */
