@@ -11,7 +11,7 @@
     const/4 v1, 0x0
 
     .line 65
-    invoke-static {p0}, Lcom/tencent/mm/sdk/platformtools/ck;->hM(Ljava/lang/String;)Z
+    invoke-static {p0}, Lcom/tencent/mm/sdk/platformtools/ck;->isEmpty(Ljava/lang/String;)Z
 
     move-result v0
 
@@ -48,7 +48,7 @@
     .line 78
     :cond_2
     :goto_1
-    invoke-static {v0}, Lcom/tencent/mm/sdk/platformtools/ck;->hM(Ljava/lang/String;)Z
+    invoke-static {v0}, Lcom/tencent/mm/sdk/platformtools/ck;->isEmpty(Ljava/lang/String;)Z
 
     move-result v2
 
@@ -120,7 +120,7 @@
     if-ne p4, v2, :cond_2
 
     .line 76
-    invoke-static {p2}, Lcom/tencent/mm/sdk/platformtools/ck;->hM(Ljava/lang/String;)Z
+    invoke-static {p2}, Lcom/tencent/mm/sdk/platformtools/ck;->isEmpty(Ljava/lang/String;)Z
 
     move-result v0
 
@@ -183,13 +183,13 @@
     move-result-object v0
 
     .line 93
-    invoke-static {v1}, Lcom/tencent/mm/sdk/platformtools/ck;->hM(Ljava/lang/String;)Z
+    invoke-static {v1}, Lcom/tencent/mm/sdk/platformtools/ck;->isEmpty(Ljava/lang/String;)Z
 
     move-result v2
 
     if-nez v2, :cond_0
 
-    invoke-static {v0}, Lcom/tencent/mm/sdk/platformtools/ck;->hM(Ljava/lang/String;)Z
+    invoke-static {v0}, Lcom/tencent/mm/sdk/platformtools/ck;->isEmpty(Ljava/lang/String;)Z
 
     move-result v2
 
@@ -248,7 +248,7 @@
     const/4 v2, 0x2
 
     .line 22
-    invoke-static {p0}, Lcom/tencent/mm/sdk/platformtools/ck;->hM(Ljava/lang/String;)Z
+    invoke-static {p0}, Lcom/tencent/mm/sdk/platformtools/ck;->isEmpty(Ljava/lang/String;)Z
 
     move-result v1
 
